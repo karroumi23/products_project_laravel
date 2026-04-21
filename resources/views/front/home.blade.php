@@ -4,16 +4,27 @@
 
 <h1>Bienvenue</h1>
 
+<h3>Catégories</h3>
+<ul>
+    @foreach($categories as $cat)
+        <li>{{ $cat->nom }}</li>
+    @endforeach
+</ul>
+
+<h3>Derniers produits</h3>
 
 <div class="row">
-    <h1>AQUALAB TECHNOLOGIE</h1>
-    <p>Fiez-vous à notre expertise pour devenir votre partenaire de confiance en
-       importation et distribution de matériels industriels, scientifiques et de
-       laboratoire. Nous mettons notre savoir-faire et notre engagement au service
-       de votre réussite, en vous proposant des solutions innovantes,fiables et
-       adaptées à vos besoins. Ensemble, construisons l'avenir de votre entreprise
-       avec des partenaires de confiance.
-    </p>
+    @foreach($products as $product)
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="{{ asset('storage/'.$product->image) }}" class="card-img-top">
+                <div class="card-body">
+                    <h5>{{ $product->nom }}</h5>
+                    <p>{{ $product->prix }} MAD</p>
+                </div>
+            </div>
+        </div>
+    @endforeach
 </div>
 
 @endsection

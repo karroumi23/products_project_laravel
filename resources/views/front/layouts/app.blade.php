@@ -253,8 +253,9 @@
 
         /* ─── ACCENT BAR (bottom decoration) ────────────────────── */
         .navbar-accent-bar {
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%, transparent 100%);
+            height: 1.5px;
+            background :#db0f0f;
+            /* background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%, transparent 100%); */
         }
 
         /* ─── MOBILE MENU ────────────────────────────────────────── */

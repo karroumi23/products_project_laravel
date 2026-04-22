@@ -14,6 +14,7 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
+    {{-- navbar style --}}
     <style>
         :root {
             --white: #FFFFFF;
@@ -318,6 +319,340 @@
             font-size: 0.9rem;
         }
     </style>
+    {{-- hero-section  style --}}
+    <style>
+                .hero-section {
+        min-height: 100vh;
+        background-image: url('{{ asset("images/hero-bg1.png") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        }
+
+        /* Dark overlay for readability over the bg image */
+        .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            120deg,
+            rgba(10, 20, 40, 0.82) 0%,
+            rgba(10, 20, 40, 0.60) 55%,
+            rgba(10, 20, 40, 0.20) 100%
+        );
+        z-index: 0;
+        }
+
+        /* Red left accent bar */
+        .hero-section::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 15%; bottom: 15%;
+        width: 4px;
+        background: #e30613;
+        border-radius: 0 4px 4px 0;
+        z-index: 1;
+        }
+
+        .hero-content {
+        position: relative;
+        z-index: 2;
+        }
+
+        /* Badge */
+        .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(227, 6, 19, 0.15);
+        border: 1px solid rgba(227, 6, 19, 0.4);
+        color: #ff6b75;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 16px;
+        border-radius: 100px;
+        }
+        .hero-badge span {
+        width: 7px; height: 7px;
+        background: #e30613;
+        border-radius: 50%;
+        display: inline-block;
+        animation: pulse-dot 1.6s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.4); }
+        }
+
+        /* Title */
+        .hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        }
+        .hero-highlight {
+        color: #e30613;
+        position: relative;
+        }
+        .hero-highlight::after {
+        content: '';
+        position: absolute;
+        left: 0; bottom: -4px;
+        width: 100%; height: 3px;
+        background: #e30613;
+        border-radius: 2px;
+        opacity: 0.5;
+        }
+
+        .hero-subtitle {
+        font-size: 1.05rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.7;
+        max-width: 480px;
+        }
+
+        /* Buttons */
+        .btn-hero-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #e30613;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.92rem;
+        letter-spacing: 0.03em;
+        padding: 14px 28px;
+        border-radius: 6px;
+        text-decoration: none;
+        border: 2px solid #e30613;
+        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 20px rgba(227,6,19,0.35);
+        }
+        .btn-hero-primary:hover {
+        background: #c0000f;
+        border-color: #c0000f;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(227,6,19,0.45);
+        color: #fff;
+        }
+
+        .btn-hero-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.92rem;
+        letter-spacing: 0.03em;
+        padding: 14px 28px;
+        border-radius: 6px;
+        text-decoration: none;
+        border: 2px solid rgba(255,255,255,0.45);
+        transition: border-color 0.2s, background 0.2s, transform 0.2s;
+        }
+        .btn-hero-outline:hover {
+        border-color: #fff;
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-2px);
+        color: #fff;
+        }
+
+        /* Stats bar */
+        .hero-stats {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        }
+        .hero-stat {
+        display: flex;
+        flex-direction: column;
+        }
+        .hero-stat strong {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1;
+        }
+        .hero-stat span {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.55);
+        margin-top: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        }
+        .hero-divider {
+        width: 1px;
+        height: 36px;
+        background: rgba(255,255,255,0.2);
+        }
+    </style>
+    {{-- cards-products  style --}}
+    <style>
+            .products-section {
+            background: #f5f6f7;
+            padding: 60px 0;
+        }
+
+        .products-section .section-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--slate-dark);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .products-section .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 40px; height: 3px;
+            background: #db0f0f;
+            border-radius: 2px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid rgba(79,88,93,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: box-shadow 0.25s, transform 0.25s;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 32px rgba(79,88,93,0.13);
+            transform: translateY(-3px);
+        }
+
+        .product-card-img-wrap {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #f0f1f2;
+            flex-shrink: 0;
+        }
+
+        .product-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-card-img-wrap img {
+            transform: scale(1.04);
+        }
+
+        .product-card-body {
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-card-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--slate-dark);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .product-card-price {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(219,15,15,0.08);
+            color: #db0f0f;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+
+        .product-card-desc {
+    font-size: 0.84rem;
+    color: var(--slate-light);
+    line-height: 1.6;
+    flex: 1;
+    max-height: 4.8em; /* 3 lines × 1.6 line-height */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.product-card-desc.expanded {
+    max-height: 500px;
+}
+
+        .btn-voir-plus {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #db0f0f;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            width: fit-content;
+            transition: color 0.2s;
+        }
+
+        .btn-voir-plus:hover {
+            color: #a00;
+        }
+
+        .product-card-footer {
+            padding: 12px 20px;
+            border-top: 1px solid rgba(79,88,93,0.08);
+            background: #fafafa;
+        }
+
+        .btn-detail {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            width: 100%;
+            background: var(--slate-dark);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 9px 16px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-detail:hover {
+            background: #db0f0f;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
 
@@ -351,13 +686,7 @@
         <!-- LOGO -->
         <a class="navbar-logo" href="/">
             {{-- Replace with your actual logo: --}}
-            {{-- <img src="{{ asset('images/logo.png') }}" alt="Aqualab Technologie"> --}}
-
-            {{-- Text fallback (remove once real logo is available) --}}
-            <div class="logo-text">
-                <span class="logo-main"><span>AQUA</span>LAB</span>
-                <span class="logo-sub">Technologie</span>
-            </div>
+            <img src="{{ asset('images/logo.png') }}" alt="Aqualab Technologie">
         </a>
 
         <!-- NAV LINKS (desktop) -->
@@ -415,16 +744,13 @@
     </a>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     CONTENT
-═══════════════════════════════════════════ -->
-<div class="container mt-5">
+
+{{-- ═══════════════════CONTENT════════════════════════  --}}
     @yield('content')
-</div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+{{-- // Mobile --}}
 <script>
     // Mobile menu toggle
     const toggler = document.getElementById('mobileToggler');

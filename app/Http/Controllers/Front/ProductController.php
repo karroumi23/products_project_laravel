@@ -9,22 +9,35 @@ use App\Models\Categorie;
 class ProductController extends Controller
 {
     public function home()
-    {
-        $products = Product::latest()->take(6)->get();
-        $categories = Categorie::all();
+{
+    $categories = Categorie::whereNull('parent_id')
+        ->with('enfants')
+        ->get();
 
-        return view('front.home', compact('products', 'categories'));
+    $query = Product::with('categorie');
+
+    // Filtre catégorie
+    if (request('categorie')) {
+        $query->where('categorie_id', request('categorie'));
     }
 
-    public function index()
-    {
-        $products = Product::with('categorie')->paginate(12);
-        return view('front.products.index', compact('products'));
+    // Filtre prix
+    if (request('prix') === 'asc') {
+        $query->orderBy('prix', 'asc');
+    } elseif (request('prix') === 'desc') {
+        $query->orderBy('prix', 'desc');
     }
 
-    public function show($id)
-    {
-        $product = Product::with('categorie')->findOrFail($id);
-        return view('front.products.show', compact('product'));
+    // Ancienneté
+    if (request('tri') === 'ancien') {
+        $query->oldest();
+    } else {
+        $query->latest();
     }
+
+    $products = $query->get(); // ← بدون take()
+
+    return view('front.home', compact('products', 'categories'));
+}
+
 }

@@ -496,7 +496,7 @@
     </style>
     {{-- cards-products  style --}}
     <style>
-            .products-section {
+        .products-section {
             background: #f5f6f7;
             padding: 60px 0;
         }
@@ -529,7 +529,8 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 100%;
+            height: auto;
+            align-self: flex-start;  /* أضف هذا */
             transition: box-shadow 0.25s, transform 0.25s;
         }
 
@@ -589,18 +590,18 @@
         }
 
         .product-card-desc {
-    font-size: 0.84rem;
-    color: var(--slate-light);
-    line-height: 1.6;
-    flex: 1;
-    max-height: 4.8em; /* 3 lines × 1.6 line-height */
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
+            font-size: 0.84rem;
+            color: var(--slate-light);
+            line-height: 1.6;
+            /* flex: 1; */
+            max-height: 4.8em; /* 3 lines × 1.6 line-height */
+            overflow: hidden;
+            transition: max-height 0.1s ease;
+        }
 
-.product-card-desc.expanded {
-    max-height: 500px;
-}
+        .product-card-desc.expanded {
+            max-height: 1000px;
+        }
 
         .btn-voir-plus {
             display: inline-flex;

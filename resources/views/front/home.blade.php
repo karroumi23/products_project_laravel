@@ -37,7 +37,8 @@
   </div>
 </section>
 
-{{-- PRODUCTS --}}
+
+
 {{-- PRODUCTS --}}
 <section class="products-section">
     <div class="container">
@@ -56,13 +57,8 @@
               <div class="product-card-price">
                 <i class="bi bi-tag-fill"></i> {{ $product->prix }} MAD
               </div>
-              <p class="product-card-desc" id="desc-{{ $loop->index }}">{{ $product->description }}</p>
-              <button
-                class="btn-voir-plus"
-                id="btn-{{ $loop->index }}"
-                onclick="toggleDesc({{ $loop->index }}, this)"
-                style="display:none"
-              >
+              <p class="product-card-desc">{{ $product->description }}</p>
+              <button class="btn-voir-plus" style="display:none">
                 <i class="bi bi-chevron-down"></i> Voir plus
               </button>
             </div>
@@ -79,25 +75,25 @@
   </section>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.product-card-desc').forEach(function (desc) {
-            const index = desc.id.replace('desc-', '');
-            const btn = document.getElementById('btn-' + index);
-            if (btn && desc.scrollHeight > desc.clientHeight) {
-                btn.style.display = 'inline-flex';
-            }
-        });
-    });
+  document.addEventListener('DOMContentLoaded', function () {
+      // For each card, check if desc overflows and show button
+      document.querySelectorAll('.product-card').forEach(function (card) {
+          var desc = card.querySelector('.product-card-desc');
+          var btn  = card.querySelector('.btn-voir-plus');
 
-    function toggleDesc(id, btn) {
-        const desc = document.getElementById('desc-' + id);
-        if (!desc) return;
-        const isExpanded = desc.classList.contains('expanded');
-        desc.classList.toggle('expanded', !isExpanded);
-        btn.innerHTML = !isExpanded
-            ? '<i class="bi bi-chevron-up"></i> Voir moins'
-            : '<i class="bi bi-chevron-down"></i> Voir plus';
-    }
-    </script>
+          if (desc.scrollHeight > desc.clientHeight) {
+              btn.style.display = 'inline-flex';
+          }
+
+          btn.addEventListener('click', function () {
+              var expanded = desc.classList.contains('expanded');
+              desc.classList.toggle('expanded', !expanded);
+              btn.innerHTML = !expanded
+                  ? '<i class="bi bi-chevron-up"></i> Voir moins'
+                  : '<i class="bi bi-chevron-down"></i> Voir plus';
+          });
+      });
+  });
+  </script>
 
 @endsection

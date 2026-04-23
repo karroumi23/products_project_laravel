@@ -495,27 +495,211 @@
         }
     </style>
 
+    {{-- filter-products style --}}
     <style>
-     .products-count {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--slate-light);
-    background: rgba(79,88,93,0.08);
-    padding: 5px 14px;
-    border-radius: 100px;
-}
+        /* ─── FILTER WRAPPER ─────────────────────────────────────── */
+        .filter-wrapper {
+            background: var(--slate-dark);
+            padding: 28px 0;
+            border-bottom: 1.5px solid #db0f0f;
+        }
 
-.pill-reset {
-    background: rgba(219,15,15,0.08);
-    border-color: rgba(219,15,15,0.3);
-    color: #db0f0f;
-    text-decoration: none;
-}
+        .filter-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
 
-.pill-reset:hover {
-    background: #db0f0f;
-    color: #fff;
-}
+        .filter-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .filter-title::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: #db0f0f;
+            display: inline-block;
+        }
+
+        .filter-reset {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 5px 12px;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+        .filter-reset:hover {
+            color: #fff;
+            border-color: #db0f0f;
+            background: rgba(219,15,15,0.15);
+        }
+
+        /* ─── FILTER GROUPS ──────────────────────────────────────── */
+        .filter-groups {
+            display: flex;
+            gap: 0;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .filter-group-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.08);
+            min-width: 0;
+        }
+        .filter-group-box:last-child { border-right: none; }
+
+        .filter-group-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 16px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .filter-group-label i { color: #db0f0f; font-size: 0.75rem; }
+
+        .filter-group-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px 12px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ─── PILLS ──────────────────────────────────────────────── */
+        .fpill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 13px;
+            border-radius: 3px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        .fpill:hover {
+            border-color: rgba(219,15,15,0.5);
+            color: #fff;
+            background: rgba(219,15,15,0.12);
+        }
+        .fpill.active {
+            background: #db0f0f;
+            border-color: #db0f0f;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(219,15,15,0.35);
+        }
+        .fpill-parent { font-weight: 600; color: rgba(255,255,255,0.75); }
+        .fpill-arrow { font-size: 0.6rem; transition: transform 0.2s; }
+        .fpill-children {
+            display: none;
+            flex-wrap: wrap;
+            gap: 5px;
+            width: 100%;
+            padding-top: 8px;
+            margin-top: 4px;
+            border-top: 1px dashed rgba(255,255,255,0.08);
+        }
+        .fpill-children.open { display: flex; }
+        .fpill-child { font-size: 0.72rem; padding: 4px 11px; border-style: dashed; opacity: 0.8; }
+
+        /* ─── RESULTS filtrage BAR ────────────────────────────────────────── */
+        .results-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0 24px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid rgba(79,88,93,0.1);
+            margin-bottom: 28px;
+        }
+        .results-count {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--slate-light);
+        }
+        .results-count strong {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #db0f0f;
+            margin-right: 4px;
+        }
+        .active-filter-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .active-filter-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(219,15,15,0.07);
+            border: 1px solid rgba(219,15,15,0.2);
+            color: #db0f0f;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── PAGINATION ─────────────────────────────────────────── */
+        .pagination .page-link {
+            color: var(--slate-dark);
+            border-color: rgba(79,88,93,0.15);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 7px 14px;
+            border-radius: 3px !important;
+            margin: 0 2px;
+            transition: all 0.15s;
+        }
+        .pagination .page-link:hover { background: #db0f0f; border-color: #db0f0f; color: #fff; }
+        .pagination .page-item.active .page-link {
+            background: #db0f0f;
+            border-color: #db0f0f;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(219,15,15,0.3);
+        }
+
+        /* ─── MOBILE ─────────────────────────────────────────────── */
+        @media (max-width: 767px) {
+            .filter-groups { flex-direction: column; }
+            .filter-group-box { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .filter-group-box:last-child { border-bottom: none; }
+        }
     </style>
 
 </head>
@@ -593,11 +777,18 @@
     </a>
 </div>
 
+
+
 {{-- CONTENT --}}
 @yield('content')
 
+
+
+
+
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
 <script>
     const toggler = document.getElementById('mobileToggler');
     const mobileMenu = document.getElementById('mobileMenu');

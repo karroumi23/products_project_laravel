@@ -495,20 +495,23 @@
         }
     </style>
 
-    {{-- filter-products style --}}
+    {{-- filter-products  title + search + reset style --}}
     <style>
-        /* ─── FILTER WRAPPER ─────────────────────────────────────── */
+            /* ─── FILTER WRAPPER ─────────────────────────────────────── */
         .filter-wrapper {
             background: var(--slate-dark);
-            padding: 28px 0;
-            border-bottom: 1.5px solid #db0f0f;
+            padding: 24px 0;
+            border-bottom: 2px solid #db0f0f;
         }
 
-        .filter-top {
+        /* ─── ROW 1 : title + search + reset ────────────────────── */
+        .filter-row1 {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            gap: 16px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
         }
 
         .filter-title {
@@ -517,33 +520,80 @@
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.35);
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
         .filter-title::before {
             content: '';
-            width: 20px;
+            width: 18px;
             height: 2px;
             background: #db0f0f;
             display: inline-block;
+            flex-shrink: 0;
         }
 
+        /* Search bar */
+        .search-bar {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            max-width: 360px;
+        }
+        .search-bar input {
+            width: 100%;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 4px;
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            padding: 8px 36px 8px 36px;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .search-bar input::placeholder { color: rgba(255,255,255,0.25); }
+        .search-bar input:focus {
+            border-color: #db0f0f;
+            background: rgba(255,255,255,0.09);
+        }
+        .search-icon {
+            position: absolute;
+            left: 11px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.78rem;
+            pointer-events: none;
+        }
+        .search-clear {
+            position: absolute;
+            right: 10px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.15s;
+            line-height: 1;
+        }
+        .search-clear:hover { color: #db0f0f; }
+
+        /* Reset button */
         .filter-reset {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.07em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.3);
             text-decoration: none;
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 5px 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 13px;
             border-radius: 3px;
             transition: all 0.2s;
+            white-space: nowrap;
         }
         .filter-reset:hover {
             color: #fff;
@@ -551,20 +601,20 @@
             background: rgba(219,15,15,0.15);
         }
 
-        /* ─── FILTER GROUPS ──────────────────────────────────────── */
+        /* ─── ROW 2 : filter groups ──────────────────────────────── */
         .filter-groups {
             display: flex;
             gap: 0;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 6px;
-            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 5px;
+            overflow: visible;
         }
 
         .filter-group-box {
             flex: 1;
             display: flex;
             flex-direction: column;
-            border-right: 1px solid rgba(255,255,255,0.08);
+            border-right: 1px solid rgba(255,255,255,0.07);
             min-width: 0;
         }
         .filter-group-box:last-child { border-right: none; }
@@ -572,76 +622,75 @@
         .filter-group-label {
             display: flex;
             align-items: center;
-            gap: 7px;
-            padding: 10px 16px;
-            font-size: 0.68rem;
+            gap: 6px;
+            padding: 8px 14px;
+            font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.13em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.35);
-            background: rgba(0,0,0,0.2);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.28);
+            background: rgba(0,0,0,0.18);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .filter-group-label i { color: #db0f0f; font-size: 0.75rem; }
+        .filter-group-label i { color: #db0f0f; font-size: 0.7rem; }
 
         .filter-group-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
-            padding: 10px 12px;
-            background: rgba(0,0,0,0.1);
+            padding: 9px 11px;
+            background: rgba(0,0,0,0.08);
         }
 
         /* ─── PILLS ──────────────────────────────────────────────── */
         .fpill {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 5px 13px;
+            gap: 4px;
+            padding: 4px 12px;
             border-radius: 3px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.05);
-            color: rgba(255,255,255,0.6);
-            font-size: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.04);
+            color: rgba(255,255,255,0.55);
+            font-size: 0.73rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.15s;
             white-space: nowrap;
             font-family: 'DM Sans', sans-serif;
-            letter-spacing: 0.02em;
         }
         .fpill:hover {
-            border-color: rgba(219,15,15,0.5);
+            border-color: rgba(219,15,15,0.45);
             color: #fff;
-            background: rgba(219,15,15,0.12);
+            background: rgba(219,15,15,0.1);
         }
         .fpill.active {
             background: #db0f0f;
             border-color: #db0f0f;
             color: #fff;
             font-weight: 600;
-            box-shadow: 0 2px 10px rgba(219,15,15,0.35);
+            box-shadow: 0 2px 8px rgba(219,15,15,0.3);
         }
-        .fpill-parent { font-weight: 600; color: rgba(255,255,255,0.75); }
-        .fpill-arrow { font-size: 0.6rem; transition: transform 0.2s; }
+        .fpill-parent { color: rgba(255,255,255,0.7); font-weight: 600; }
+        .fpill-arrow { font-size: 0.58rem; transition: transform 0.2s; }
         .fpill-children {
             display: none;
             flex-wrap: wrap;
             gap: 5px;
             width: 100%;
-            padding-top: 8px;
-            margin-top: 4px;
-            border-top: 1px dashed rgba(255,255,255,0.08);
+            padding-top: 7px;
+            margin-top: 5px;
+            border-top: 1px dashed rgba(255,255,255,0.07);
         }
         .fpill-children.open { display: flex; }
-        .fpill-child { font-size: 0.72rem; padding: 4px 11px; border-style: dashed; opacity: 0.8; }
+        .fpill-child { font-size: 0.7rem; padding: 3px 10px; border-style: dashed; opacity: 0.75; }
 
-        /* ─── RESULTS filtrage BAR ────────────────────────────────────────── */
+        /* ─── RESULTS BAR ────────────────────────────────────────── */
         .results-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 0 24px 0;
+            padding: 18px 0 22px 0;
             flex-wrap: wrap;
             gap: 10px;
             border-bottom: 1px solid rgba(79,88,93,0.1);
@@ -665,14 +714,14 @@
             align-items: center;
             gap: 5px;
             background: rgba(219,15,15,0.07);
-            border: 1px solid rgba(219,15,15,0.2);
+            border: 1px solid rgba(219,15,15,0.18);
             color: #db0f0f;
             font-size: 0.7rem;
             font-weight: 600;
             padding: 3px 10px;
             border-radius: 3px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
         }
 
         /* ─── PAGINATION ─────────────────────────────────────────── */
@@ -696,11 +745,18 @@
 
         /* ─── MOBILE ─────────────────────────────────────────────── */
         @media (max-width: 767px) {
+            .filter-row1 { flex-direction: column; align-items: stretch; }
+            .search-bar { max-width: 100%; }
             .filter-groups { flex-direction: column; }
-            .filter-group-box { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .filter-group-box { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
             .filter-group-box:last-child { border-bottom: none; }
         }
     </style>
+
+
+    {{-- SEARCH BAR   style --}}
+
+
 
 </head>
 <body>

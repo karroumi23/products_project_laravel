@@ -24,6 +24,11 @@ class ProductController extends Controller
 
         $query = Product::with('categorie');
 
+         // Recherche par nom
+        if (request('search')) {
+            $query->where('nom', 'like', '%' . request('search') . '%');
+        }
+
         // Filtre catégorie
         if (request('categorie')) {
             $query->where('categorie_id', request('categorie'));

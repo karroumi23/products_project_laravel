@@ -131,4 +131,6 @@ return [
         ],
     ],
 
+    'stock_manager' => env('STOCK_MANAGER_EMAIL', 'wondersky500@gmail.com'),  // ← ici
+
 ];

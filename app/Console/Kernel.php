@@ -12,7 +12,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('stock:check-low')
+                 ->dailyAt('08:00')          // chaque jour à 08h00
+                 ->timezone('Africa/Casablanca')
+                 ->withoutOverlapping()       // évite les doublons
+                 ->emailOutputOnFailure(config('mail.stock_manager')); // alerte si erreur
     }
 
     /**

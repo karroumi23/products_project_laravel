@@ -3,8 +3,7 @@
 
 
 
-{{-- FILTER --}}
-{{-- FILTER --}}
+
  {{-- FILTER --}}
 <div class="filter-wrapper">
     <div class="container">
@@ -195,149 +194,11 @@
 </section>
 
 
-{{-- PRODUCTS --}}
-<section class="products-section">
-    <div class="container">
-
-        <div class="results-bar">
-            <div class="results-count">
-                <strong>{{ $products->total() }}</strong>
-                produit{{ $products->total() > 1 ? 's' : '' }} trouvé{{ $products->total() > 1 ? 's' : '' }}
-            </div>
-            <div class="active-filter-tags">
-                @if(request('search'))
-                    <span class="active-filter-tag"><i class="bi bi-search"></i> "{{ request('search') }}"</span>
-                @endif
-                @if(request('categorie'))
-                    <span class="active-filter-tag"><i class="bi bi-tag-fill"></i> Catégorie filtrée</span>
-                @endif
-                @if(request('prix') == 'asc')
-                    <span class="active-filter-tag"><i class="bi bi-sort-numeric-down"></i> Prix croissant</span>
-                @elseif(request('prix') == 'desc')
-                    <span class="active-filter-tag"><i class="bi bi-sort-numeric-up"></i> Prix décroissant</span>
-                @endif
-                @if(request('tri') == 'ancien')
-                    <span class="active-filter-tag"><i class="bi bi-hourglass-split"></i> Anciens d'abord</span>
-                @endif
-            </div>
-        </div>
-
-        <div class="row g-4">
-            @forelse($products as $product)
-            <div class="col-sm-6 col-lg-4">
-                <div class="product-card">
-                    <div class="product-card-img-wrap">
-                        <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->nom }}">
-                    </div>
-                    <div class="product-card-body">
-                        <div class="product-card-name">{{ $product->nom }}</div>
-                        <div class="product-card-price">
-                            <i class="bi bi-tag-fill"></i> {{ $product->prix }} MAD
-                        </div>
-                        <p class="product-card-desc">{{ $product->description }}</p>
-                        <button class="btn-voir-plus" style="display:none">
-                            <i class="bi bi-chevron-down"></i> Voir plus
-                        </button>
-                    </div>
-                    <div class="product-card-footer">
-                        <a href="/products/{{ $product->id }}" class="btn-detail">
-                            <i class="bi bi-eye"></i> Voir le produit
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @empty
-                <div class="col-12 text-center py-5">
-                    <i class="bi bi-search" style="font-size:2.5rem; color:#db0f0f; opacity:0.4"></i>
-                    <p class="mt-3" style="color:var(--slate-light)">Aucun produit trouvé.</p>
-                    <a href="{{ url('/products') }}" class="btn-hero-primary mt-2"
-                       style="width:fit-content; margin:0 auto; display:inline-flex">
-                        Réinitialiser
-                    </a>
-                </div>
-            @endempty
-        </div>
-
-        @if($products->hasPages())
-        <div class="d-flex justify-content-center mt-5">
-            {{ $products->links('pagination::bootstrap-5') }}
-        </div>
-        @endif
-
-    </div>
-</section>
 
 
 
 
-{{-- PRODUCTS --}}
-<section class="products-section">
-    <div class="container">
 
-        <div class="results-bar">
-            <div class="results-count">
-                <strong>{{ $products->total() }}</strong>
-                produit{{ $products->total() > 1 ? 's' : '' }} trouvé{{ $products->total() > 1 ? 's' : '' }}
-            </div>
-            <div class="active-filter-tags">
-                @if(request('categorie'))
-                    <span class="active-filter-tag"><i class="bi bi-tag-fill"></i> Catégorie filtrée</span>
-                @endif
-                @if(request('prix') == 'asc')
-                    <span class="active-filter-tag"><i class="bi bi-sort-numeric-down"></i> Prix croissant</span>
-                @elseif(request('prix') == 'desc')
-                    <span class="active-filter-tag"><i class="bi bi-sort-numeric-up"></i> Prix décroissant</span>
-                @endif
-                @if(request('tri') == 'ancien')
-                    <span class="active-filter-tag"><i class="bi bi-hourglass-split"></i> Anciens d'abord</span>
-                @endif
-            </div>
-        </div>
-
-        <div class="row g-4">
-            @forelse($products as $product)
-            <div class="col-sm-6 col-lg-4">
-                <div class="product-card">
-                    <div class="product-card-img-wrap">
-                        <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->nom }}">
-                    </div>
-                    <div class="product-card-body">
-                        <div class="product-card-name">{{ $product->nom }}</div>
-                        <div class="product-card-price">
-                            <i class="bi bi-tag-fill"></i> {{ $product->prix }} MAD
-                        </div>
-                        <p class="product-card-desc">{{ $product->description }}</p>
-                        <button class="btn-voir-plus" style="display:none">
-                            <i class="bi bi-chevron-down"></i> Voir plus
-                        </button>
-                    </div>
-                    <div class="product-card-footer">
-                        <a href="/products/{{ $product->id }}" class="btn-detail">
-                            <i class="bi bi-eye"></i> Voir le produit
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @empty
-                <div class="col-12 text-center py-5">
-                    <i class="bi bi-search" style="font-size:2.5rem; color:#db0f0f; opacity:0.4"></i>
-                    <p class="mt-3" style="color:var(--slate-light)">Aucun produit trouvé.</p>
-                    <a href="{{ url('/products') }}" class="btn-hero-primary mt-2"
-                       style="width:fit-content; margin:0 auto; display:inline-flex">
-                        Réinitialiser
-                    </a>
-                </div>
-            @endempty
-        </div>
-
-        @if($products->hasPages())
-        <div class="d-flex justify-content-center mt-5">
-            {{ $products->links('pagination::bootstrap-5') }}
-        </div>
-        @endif
-
-    </div>
-</section>
 
 {{-- search by name script --}}
 <script>

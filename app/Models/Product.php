@@ -12,15 +12,27 @@ class Product extends Model
     protected $fillable = [
         'nom',
         'prix',
+        'tva',
+        'prix_ttc',
         'stock',
         'image',
         'description',
-        'categorie_id', // ⚠️ IMPORTANT: you are missing this
+        'categorie_id',
     ];
 
-    public function categorie()
-{
-    return $this->belongsTo(Categorie::class);
-}
+    // Calcul automatique prix_ttc avant sauvegarde
+    protected static function booted(): void
+    {
+        static::saving(function (Product $product) {
+            $product->prix_ttc = round(
+                $product->prix * (1 + $product->tva / 100),
+                2
+            );
+        });
+    }
 
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
 }

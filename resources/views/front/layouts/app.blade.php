@@ -495,6 +495,98 @@
         }
     </style>
 
+    {{-- SLIDESHOW products  --}}
+    <style>
+        /* ─── SLIDESHOW ──────────────────────────────────────────── */
+        .slider-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .slider-track .slide-item {
+            flex: 0 0 calc(33.333% - 16px);
+            min-width: calc(33.333% - 16px);
+        }
+
+        /* ─── NAV ARROWS ─────────────────────────────────────────── */
+        .slider-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slider-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 4px;
+            border: 1px solid rgba(79,88,93,0.2);
+            background: #fff;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.18s;
+            font-size: 0.9rem;
+        }
+        .slider-btn:hover {
+            background: #db0f0f;
+            border-color: #db0f0f;
+            color: #fff;
+        }
+        .slider-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* ─── DOTS ───────────────────────────────────────────────── */
+        .slider-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 24px;
+            justify-content: center;
+        }
+        .slider-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(79,88,93,0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            padding: 0;
+        }
+        .slider-dot.active {
+            background: #db0f0f;
+            width: 22px;
+            border-radius: 4px;
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────────── */
+        @media (max-width: 991px) {
+            .slider-track .slide-item {
+                flex: 0 0 calc(50% - 12px);
+                min-width: calc(50% - 12px);
+            }
+        }
+        @media (max-width: 575px) {
+            .slider-track .slide-item {
+                flex: 0 0 100%;
+                min-width: 100%;
+            }
+        }
+    </style>
+
+
     {{-- filter-products  title + search + reset style --}}
     <style>
             /* ─── FILTER WRAPPER ─────────────────────────────────────── */

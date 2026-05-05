@@ -91,7 +91,50 @@
     </div>
 </section>
 
+{{-- PARTENAIRES --}}
+<section class="partners-section">
+    <div class="container">
+        <div class="partners-header mb-4">
+            <h2 class="section-title">Partenaires <span style="color:#db0f0f">Exclusifs</span></h2>
+        </div>
+    </div>
 
+    <div class="partners-track-wrapper">
+        <div class="partners-track" id="partnersTrack">
+            {{-- Duplicate items for infinite loop effect --}}
+            @php
+            $partners = [
+                ['name' => 'Tinius Olsen',  'logo' => 'images/partners/leica.png'],
+                ['name' => 'Leica',         'logo' => 'images/partners/leica.png'],
+                ['name' => 'PRESI',         'logo' => 'images/partners/leica.png'],
+                ['name' => 'Climats',       'logo' => 'images/partners/leica.png'],
+                ['name' => 'Buehler',       'logo' => 'images/partners/leica.png'],
+                ['name' => 'Mettler',       'logo' => 'images/partners/leica.png'],
+            ];
+            @endphp
+
+            {{-- First set --}}
+            @foreach($partners as $partner)
+            <div class="partner-item">
+                <div class="partner-logo-wrap">
+                    <img src="{{ asset($partner['logo']) }}" alt="{{ $partner['name'] }}">
+                </div>
+                <span class="partner-name">{{ $partner['name'] }}</span>
+            </div>
+            @endforeach
+
+            {{-- Duplicate set for seamless infinite loop --}}
+            @foreach($partners as $partner)
+            <div class="partner-item">
+                <div class="partner-logo-wrap">
+                    <img src="{{ asset($partner['logo']) }}" alt="{{ $partner['name'] }}">
+                </div>
+                <span class="partner-name">{{ $partner['name'] }}</span>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
 
 
 

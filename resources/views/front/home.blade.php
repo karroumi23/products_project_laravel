@@ -37,18 +37,14 @@
     </div>
 </section>
 
-
 {{-- PRODUCTS SLIDESHOW --}}
 <section class="products-section">
     <div class="container">
 
-        {{-- Header --}}
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-5">
-            <div>
-                <h2 class="section-title mb-0">Nos Produits</h2>
-            </div>
-            <div class="d-flex align-items-center gap-3">
-                {{-- Arrows --}}
+        {{-- Header: title + arrows + voir tous --}}
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+            <h2 class="section-title">Nos Produits</h2>
+            <div class="d-flex align-items-center gap-2">
                 <div class="slider-nav">
                     <button class="slider-btn" id="sliderPrev">
                         <i class="bi bi-chevron-left"></i>
@@ -57,7 +53,6 @@
                         <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
-                {{-- Voir tous --}}
                 <a href="/products" class="btn-voir-tous">
                     <i class="bi bi-grid"></i> Voir tous les produits
                 </a>
@@ -74,14 +69,10 @@
                             <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->nom }}">
                         </div>
                         <div class="product-card-body">
-                            <div class="product-card-name">{{ $product->nom }}</div>
+                            <div class="product-card-name" title="{{ $product->nom }}">{{ $product->nom }}</div>
                             <div class="product-card-price">
                                 <i class="bi bi-tag-fill"></i> {{ $product->prix }} MAD
                             </div>
-                            <p class="product-card-desc">{{ $product->description }}</p>
-                            <button class="btn-voir-plus" style="display:none">
-                                <i class="bi bi-chevron-down"></i> Voir plus
-                            </button>
                         </div>
                         <div class="product-card-footer">
                             <a href="/products/{{ $product->id }}" class="btn-detail">
@@ -105,80 +96,103 @@
 
 
 
-{{-- voir plus  --}}
-{{-- voir plus  --}}
+
+{{-- voir plus js --}}
+{{-- slide js  --}}
 <script>
+    // Wait for the DOM to be fully loaded before running the slider
     document.addEventListener('DOMContentLoaded', function () {
 
-        // ─── VOIR PLUS ────────────────────────────────────────────
-        document.querySelectorAll('.product-card').forEach(function (card) {
-            var desc = card.querySelector('.product-card-desc');
-            var btn  = card.querySelector('.btn-voir-plus');
-            if (desc.scrollHeight > desc.clientHeight) {
-                btn.style.display = 'inline-flex';
-            }
-            btn.addEventListener('click', function () {
-                var expanded = desc.classList.contains('expanded');
-                desc.classList.toggle('expanded', !expanded);
-                btn.innerHTML = !expanded
-                    ? '<i class="bi bi-chevron-up"></i> Voir moins'
-                    : '<i class="bi bi-chevron-down"></i> Voir plus';
-            });
-        });
+        // ─── DOM ELEMENTS ─────────────────────────────────────────
+        const track    = document.getElementById('sliderTrack');   // the moving container of all slides
+        const prevBtn  = document.getElementById('sliderPrev');    // left arrow button
+        const nextBtn  = document.getElementById('sliderNext');    // right arrow button
+        const dotsWrap = document.getElementById('sliderDots');    // container for dot indicators
+        const items    = track.querySelectorAll('.slide-item');    // all individual slide cards
+        const total    = items.length;                             // total number of slides
 
-        // ─── SLIDER ───────────────────────────────────────────────
-        const track      = document.getElementById('sliderTrack');
-        const prevBtn    = document.getElementById('sliderPrev');
-        const nextBtn    = document.getElementById('sliderNext');
-        const dotsWrap   = document.getElementById('sliderDots');
-        const items      = track.querySelectorAll('.slide-item');
-        const total      = items.length;
+        // ─── STATE ────────────────────────────────────────────────
+        let current  = 0;              // index of the currently visible first slide
+        let perView  = getPerView();   // how many slides are visible at once
+        let maxIndex = Math.max(0, total - perView); // maximum index we can scroll to
 
-        let current      = 0;
-        let perView      = getPerView();
-        let maxIndex     = Math.max(0, total - perView);
+        // ─── FUNCTIONS ────────────────────────────────────────────
 
-        // Build dots
-        function buildDots() {
-            dotsWrap.innerHTML = '';
-            const pages = Math.ceil(total / perView);
-            for (let i = 0; i < pages; i++) {
-                const dot = document.createElement('button');
-                dot.classList.add('slider-dot');
-                if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goTo(i * perView));
-                dotsWrap.appendChild(dot);
-            }
-        }
-
-        function updateDots() {
-            const dots  = dotsWrap.querySelectorAll('.slider-dot');
-            const page  = Math.round(current / perView);
-            dots.forEach((d, i) => d.classList.toggle('active', i === page));
-        }
-
+        /**
+         * Returns how many slides to show at once
+         * based on the current screen width (responsive).
+         * mobile  < 576px  → 1 slide
+         * tablet  < 992px  → 2 slides
+         * desktop ≥ 992px  → 3 slides
+         */
         function getPerView() {
             if (window.innerWidth < 576) return 1;
             if (window.innerWidth < 992) return 2;
             return 3;
         }
 
+        /**
+         * Returns the width of one slide including the gap (16px).
+         * Used to calculate how many pixels to translate the track.
+         */
         function getSlideWidth() {
-            return items[0].offsetWidth + 24; // width + gap
+            return items[0].offsetWidth + 16; // slide width + gap between slides
         }
 
+        /**
+         * Builds the dot indicators dynamically based on
+         * the total number of pages (total slides / slides per view).
+         * Each dot navigates to the corresponding page when clicked.
+         */
+        function buildDots() {
+            dotsWrap.innerHTML = ''; // clear existing dots before rebuilding
+            const pages = Math.ceil(total / perView); // number of pages
+            for (let i = 0; i < pages; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('slider-dot');
+                if (i === 0) dot.classList.add('active'); // first dot is active by default
+                dot.addEventListener('click', () => goTo(i * perView)); // navigate to page on click
+                dotsWrap.appendChild(dot);
+            }
+        }
+
+        /**
+         * Updates the active dot to match the current slide position.
+         * Calculates which page we are on and highlights the correct dot.
+         */
+        function updateDots() {
+            const dots = dotsWrap.querySelectorAll('.slider-dot');
+            const page = Math.round(current / perView); // current page index
+            dots.forEach((d, i) => d.classList.toggle('active', i === page));
+        }
+
+        /**
+         * Moves the slider to a specific slide index.
+         * - Clamps the index between 0 and maxIndex to prevent overflow.
+         * - Translates the track horizontally using CSS transform.
+         * - Enables/disables prev & next buttons based on position.
+         * - Updates the active dot indicator.
+         *
+         * @param {number} index - The target slide index to navigate to
+         */
         function goTo(index) {
-            current = Math.max(0, Math.min(index, maxIndex));
-            track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
-            prevBtn.disabled = current === 0;
-            nextBtn.disabled = current >= maxIndex;
+            current = Math.max(0, Math.min(index, maxIndex)); // clamp within valid range
+            track.style.transform = `translateX(-${current * getSlideWidth()}px)`; // move track
+            prevBtn.disabled = current === 0;          // disable prev if at the start
+            nextBtn.disabled = current >= maxIndex;    // disable next if at the end
             updateDots();
         }
 
+        // ─── EVENT LISTENERS ──────────────────────────────────────
+
+        // Previous button: go back by one group of slides
         prevBtn.addEventListener('click', () => goTo(current - perView));
+
+        // Next button: go forward by one group of slides
         nextBtn.addEventListener('click', () => goTo(current + perView));
 
-        // Resize handler
+        // On window resize: recalculate perView and maxIndex,
+        // reset to first slide, and rebuild dots for new layout
         window.addEventListener('resize', () => {
             perView  = getPerView();
             maxIndex = Math.max(0, total - perView);
@@ -187,10 +201,12 @@
             goTo(0);
         });
 
-        // Init
-        buildDots();
-        goTo(0);
+        // ─── INIT ─────────────────────────────────────────────────
+        buildDots(); // build dots on page load
+        goTo(0);     // start at the first slide
     });
-    </script>
+</script>
+
+
 
     @endsection

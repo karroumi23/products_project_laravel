@@ -51,21 +51,35 @@ class SectionSeeder extends Seeder
             ],
         ]);
 
-        Section::create([
-            'name'    => 'services',
-            'label'   => 'Nos Services',
-            'enabled' => true,
-            'order'   => 3,
+        Section::where('name', 'services')->update([
             'content' => [
                 'title'    => 'Nos Services',
                 'subtitle' => 'Des solutions adaptées à vos besoins',
                 'services' => [
-                    ['icon' => 'bi-tools',        'title' => 'Maintenance',      'description' => 'Service de maintenance préventive et corrective.'],
-                    ['icon' => 'bi-truck',         'title' => 'Livraison',        'description' => 'Livraison rapide partout au Maroc.'],
-                    ['icon' => 'bi-headset',       'title' => 'Support',          'description' => 'Support technique disponible 6j/7.'],
-                    ['icon' => 'bi-patch-check',   'title' => 'Certification',    'description' => 'Produits certifiés et conformes aux normes.'],
+                    [
+                        'icon'        => 'bi-gear-fill',
+                        'title'       => 'Installation et mise en marche',
+                        'description' => "Profitez de notre service d'installation et de mise en marche assuré par nos techniciens expérimentés. Nous vous garantissons une configuration optimale sans aucun souci, vous permettant de démarrer en toute tranquillité. Faites confiance à notre équipe qualifiée pour une installation réussie de vos équipements.",
+                    ],
+                    [
+                        'icon'        => 'bi-mortarboard-fill',
+                        'title'       => 'Formation produit',
+                        'description' => "Elle vise à familiariser les participants avec leur utilisation efficace et sûre, en couvrant les caractéristiques, les consignes de sécurité, l'installation, le fonctionnement et la maintenance. L'objectif est d'autonomiser les utilisateurs pour maximiser la productivité et minimiser les risques.",
+                    ],
+                    [
+                        'icon'        => 'bi-headset',
+                        'title'       => 'Assistance technique',
+                        'description' => "Bénéficiez de notre assistance technique complète, comprenant l'intervention de nos techniciens en cas de panne, que ce soit pendant ou en dehors de la période de garantie. Notre équipe de techniciens qualifiés est disponible pour résoudre rapidement tout problème technique rencontré avec nos produits.",
+                    ],
+                    [
+                        'icon'        => 'bi-box-seam-fill',
+                        'title'       => 'Disponibilité de stock',
+                        'description' => "Nous avons en stock une variété de pièces de rechange et de consommables pour répondre à vos besoins. Que ce soit pour remplacer des composants défectueux ou pour assurer la disponibilité des consommables nécessaires, nous sommes là pour vous fournir les pièces adéquates.",
+                    ],
                 ],
             ],
         ]);
+
+
     }
 }

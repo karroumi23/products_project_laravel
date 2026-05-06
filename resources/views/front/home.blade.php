@@ -136,26 +136,35 @@
     @endif
 
 
-    {{-- ─── SERVICES ─────────────────────────────────────────── --}}
+   {{-- ─── SERVICES ─────────────────────────────────────────── --}}
     @if($section->name === 'services')
     @php $s = $section->content; @endphp
     <section class="services-section">
         <div class="container">
-            <div class="mb-5">
-                <h2 class="section-title">{{ $s['title'] ?? 'Nos Services' }}</h2>
-                @if(!empty($s['subtitle']))
-                    <p class="services-subtitle">{{ $s['subtitle'] }}</p>
-                @endif
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-5">
+                <div>
+                    <h2 class="section-title">{{ $s['title'] ?? 'Nos Services' }}</h2>
+                    @if(!empty($s['subtitle']))
+                        <p class="services-subtitle mt-1">{{ $s['subtitle'] }}</p>
+                    @endif
+                </div>
             </div>
-            <div class="row g-4">
-                @foreach($s['services'] as $service)
-                <div class="col-sm-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi {{ $service['icon'] }}"></i>
+            <div class="row g-3">
+                @foreach($s['services'] as $i => $service)
+                <div class="col-12">
+                    <div class="service-accordion" id="service-{{ $i }}">
+                        <button class="service-accordion-header" onclick="toggleService({{ $i }})">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="service-icon-sm">
+                                    <i class="bi {{ $service['icon'] }}"></i>
+                                </div>
+                                <span class="service-accordion-title">{{ $service['title'] }}</span>
+                            </div>
+                            <i class="bi bi-chevron-down service-chevron" id="chevron-{{ $i }}"></i>
+                        </button>
+                        <div class="service-accordion-body" id="body-{{ $i }}">
+                            <p class="service-accordion-desc">{{ $service['description'] }}</p>
                         </div>
-                        <div class="service-title">{{ $service['title'] }}</div>
-                        <p class="service-desc">{{ $service['description'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -170,8 +179,18 @@
 
 
 {{-- voir plus js --}}
-
 <script>
+
+    // Services accordion
+function toggleService(i) {
+    const acc     = document.getElementById('service-' + i);
+    const isOpen  = acc.classList.contains('open');
+    // Close all first
+    document.querySelectorAll('.service-accordion').forEach(el => el.classList.remove('open'));
+    // Open clicked if it was closed
+    if (!isOpen) acc.classList.add('open');
+}
+
     document.addEventListener('DOMContentLoaded', function () {
         const track    = document.getElementById('sliderTrack');
         const prevBtn  = document.getElementById('sliderPrev');
@@ -213,6 +232,17 @@
             nextBtn.disabled = current >= maxIndex;
             updateDots();
         }
+
+        //         // Services accordion
+        // function toggleService(i) {
+        //     const acc     = document.getElementById('service-' + i);
+        //     const isOpen  = acc.classList.contains('open');
+        //     // Close all first
+        //     document.querySelectorAll('.service-accordion').forEach(el => el.classList.remove('open'));
+        //     // Open clicked if it was closed
+        //     if (!isOpen) acc.classList.add('open');
+        // }
+
         prevBtn.addEventListener('click', () => goTo(current - perView));
         nextBtn.addEventListener('click', () => goTo(current + perView));
         window.addEventListener('resize', () => {

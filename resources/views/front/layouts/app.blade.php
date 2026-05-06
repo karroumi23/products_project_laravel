@@ -754,59 +754,96 @@
 
     {{-- SERVICES SECTION home page --}}
     <style>
-            /* ─── SERVICES SECTION ───────────────────────────────────── */
+        /* ─── SERVICES SECTION ───────────────────────────────────── */
         .services-section {
-            background: var(--slate-dark);
+            background: #f5f6f7;
             padding: 60px 0;
         }
-        .services-section .section-title {
-            color: #fff;
-        }
-        .services-section .section-title::after {
-            background: #db0f0f;
-        }
         .services-subtitle {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-            margin-top: 6px;
+            color: var(--slate-light);
+            font-size: 0.88rem;
         }
-        .service-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 8px;
-            padding: 28px 24px;
-            transition: background 0.2s, border-color 0.2s, transform 0.2s;
-            height: 100%;
+
+        /* Accordion */
+        .service-accordion {
+            background: #fff;
+            border: 1px solid rgba(79,88,93,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
         }
-        .service-card:hover {
+        .service-accordion:hover {
+            box-shadow: 0 4px 20px rgba(79,88,93,0.1);
+        }
+        .service-accordion-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            background: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.18s;
+            text-align: left;
+        }
+        .service-accordion-header:hover {
+            background: rgba(219,15,15,0.03);
+        }
+        .service-accordion.open .service-accordion-header {
+            background: var(--slate-dark);
+            border-bottom: 2px solid #db0f0f;
+        }
+        .service-icon-sm {
+            width: 38px; height: 38px;
             background: rgba(219,15,15,0.08);
-            border-color: rgba(219,15,15,0.3);
-            transform: translateY(-4px);
-        }
-        .service-icon {
-            width: 48px; height: 48px;
-            background: rgba(219,15,15,0.12);
             border-radius: 6px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem;
-            color: #db0f0f;
-            margin-bottom: 16px;
-            transition: background 0.2s;
+            font-size: 1rem; color: #db0f0f;
+            flex-shrink: 0;
+            transition: background 0.18s, color 0.18s;
         }
-        .service-card:hover .service-icon { background: #db0f0f; color: #fff; }
-        .service-title {
+        .service-accordion.open .service-icon-sm {
+            background: #db0f0f;
+            color: #fff;
+        }
+        .service-accordion-title {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 1.05rem; font-weight: 700;
+            font-size: 1rem; font-weight: 700;
             letter-spacing: 0.05em; text-transform: uppercase;
-            color: #fff; margin-bottom: 8px;
+            color: var(--slate-dark);
+            transition: color 0.18s;
         }
-        .service-desc {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.45);
-            line-height: 1.6;
+        .service-accordion.open .service-accordion-title {
+            color: #fff;
+        }
+        .service-chevron {
+            font-size: 0.85rem;
+            color: var(--slate-light);
+            transition: transform 0.3s ease, color 0.18s;
+            flex-shrink: 0;
+        }
+        .service-accordion.open .service-chevron {
+            transform: rotate(180deg);
+            color: #fff;
+        }
+        .service-accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            padding: 0 24px;
+        }
+        .service-accordion.open .service-accordion-body {
+            max-height: 300px;
+            padding: 18px 24px;
+        }
+        .service-accordion-desc {
+            font-size: 0.85rem;
+            color: var(--slate-light);
+            line-height: 1.7;
+            margin: 0;
         }
     </style>
-
 
 
 

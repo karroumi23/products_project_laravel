@@ -8,11 +8,17 @@ use App\Models\Categorie;
 
 class ProductController extends Controller
 {
-    // Page d'accueil — 6 produits récents, sans filtres
     public function home()
     {
-        $products = Product::with('categorie')->latest()->take(6)->get();
-        return view('front.home', compact('products'));
+        $products = Product::with('categorie')->latest()->take(9)->get();
+
+        // Charger les sections actives triées par ordre
+        $sections = \App\Models\Section::where('enabled', true)
+            ->orderBy('order')
+            ->get()
+            ->keyBy('name'); // accès par $sections['hero'], $sections['partners']...
+
+        return view('front.home', compact('products', 'sections'));
     }
 
     // Page produits — tous les produits avec filtres

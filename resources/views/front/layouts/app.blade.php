@@ -185,6 +185,30 @@
         }
     </style>
 
+    {{-- titles style --}}
+    <style>
+                .section-title{
+            font-size: 52px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 15px;
+            position: relative;
+            line-height: 1.1;
+        }
+
+        .section-title::after{
+            content: '';
+            width: 90px;
+            height: 2px;
+            background: linear-gradient(to right, #e20613, #ff4d5a);
+            position: absolute;
+            left: 0;
+            bottom: -12px;
+            border-radius: 30px;
+        }
+
+    </style>
+
     {{-- hero-section style --}}
     <style>
         .hero-section {
@@ -341,6 +365,7 @@
 
     {{-- products slider  section home page --}}
     <style>
+
         /* ─── SLIDER ─────────────────────────────────────────────── */
         .slider-wrapper { overflow: hidden; border-radius: 8px; }
         .slider-track {

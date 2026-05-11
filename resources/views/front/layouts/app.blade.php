@@ -845,6 +845,285 @@
         }
     </style>
 
+     {{--  À Propos page --}}
+    <style>
+                body{
+            background: #f4f6f9;
+        }
+
+        /* ================= HERO ================= */
+
+        .about-hero{
+            position: relative;
+            padding: 120px 0 100px;
+            background:
+                linear-gradient(rgba(11,16,27,0.88), rgba(11,16,27,0.92)),
+                url('{{ asset("images/about-bg.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .about-hero::before{
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 350px;
+            height: 350px;
+            background: rgba(226, 6, 19, 0.08);
+            border-radius: 50%;
+        }
+
+        .about-hero::after{
+            content: '';
+            position: absolute;
+            bottom: -120px;
+            left: -120px;
+            width: 320px;
+            height: 320px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .about-badge{
+            display: inline-block;
+            background: rgba(226, 6, 19, 0.15);
+            color: #ff2d3d;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .about-title{
+            color: #fff;
+            font-size: 65px;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .about-title span{
+            color: #e20613;
+        }
+
+        .about-description{
+            color: #cfd5df;
+            font-size: 18px;
+            line-height: 1.9;
+            max-width: 850px;
+        }
+
+        /* ================= INFO SECTION ================= */
+
+        .about-info{
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section-heading{
+            font-size: 48px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-heading::after{
+            content: '';
+            width: 90px;
+            height: 4px;
+            background: #e20613;
+            position: absolute;
+            left: 0;
+            bottom: -12px;
+            border-radius: 20px;
+        }
+
+        .about-card{
+            background: #fff;
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            border: 1px solid #edf1f7;
+            transition: 0.4s ease;
+            height: 100%;
+        }
+
+        .about-card:hover{
+            transform: translateY(-8px);
+        }
+
+        .about-card p{
+            color: #64748b;
+            line-height: 2;
+            font-size: 16px;
+        }
+
+        .about-card strong{
+            color: #1e293b;
+        }
+
+        /* ================= TIMELINE ================= */
+
+        .timeline-section{
+            padding: 100px 0;
+            background: #0f172a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-title{
+            text-align: center;
+            color: #fff;
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 80px;
+        }
+
+        .timeline{
+            position: relative;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .timeline::before{
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #e20613, #ffffff20);
+        }
+
+        .timeline-item{
+            position: relative;
+            width: 50%;
+            padding: 20px 50px;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item.left{
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right{
+            left: 50%;
+        }
+
+        .timeline-content{
+            background: #1e293b;
+            padding: 35px;
+            border-radius: 24px;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+            transition: 0.4s ease;
+        }
+
+        .timeline-content:hover{
+            transform: translateY(-8px);
+            border-color: rgba(226,6,19,0.4);
+        }
+
+        .timeline-year{
+            display: inline-block;
+            background: #e20613;
+            color: white;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 40px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .timeline-content h3{
+            color: #fff;
+            font-size: 26px;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .timeline-content p{
+            color: #cbd5e1;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        .timeline-dot{
+            position: absolute;
+            top: 50px;
+            width: 22px;
+            height: 22px;
+            background: #e20613;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(226,6,19,0.6);
+        }
+
+        .timeline-item.left .timeline-dot{
+            right: -11px;
+        }
+
+        .timeline-item.right .timeline-dot{
+            left: -11px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 991px){
+
+            .about-title{
+                font-size: 45px;
+            }
+
+            .timeline::before{
+                left: 20px;
+            }
+
+            .timeline-item{
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 15px;
+                text-align: left !important;
+            }
+
+            .timeline-item.right{
+                left: 0;
+            }
+
+            .timeline-dot{
+                left: 10px !important;
+            }
+        }
+
+        @media(max-width: 768px){
+
+            .about-title{
+                font-size: 38px;
+            }
+
+            .section-heading,
+            .timeline-title{
+                font-size: 36px;
+            }
+
+            .about-card,
+            .timeline-content{
+                padding: 28px;
+            }
+        }
+    </style>
+
     {{-- footer SECTION  --}}
     <style>
         /* ─── FOOTER ─────────────────────────────────────────────── */

@@ -715,66 +715,57 @@
     {{-- PARTNERS SECTION home page --}}
     <style>
             /* ─── PARTNERS SECTION ───────────────────────────────────── */
-        .partners-section {
-            background: #fff;
-            padding: 48px 0;
-            border-top: 1px solid rgba(79,88,93,0.08);
-            overflow: hidden;
-        }
-        .partners-track-wrapper {
-            overflow: hidden;
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-        }
-        .partners-track {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            width: max-content;
-            animation: scrollLeft 22s linear infinite;
-        }
-        .partners-track:hover { animation-play-state: paused; }
-        @keyframes scrollLeft {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .partner-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-            padding: 16px 24px;
-            border: 1px solid rgba(79,88,93,0.1);
-            border-radius: 8px;
-            background: #fafafa;
-            min-width: 140px;
-            transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
-        }
-        .partner-item:hover {
-            box-shadow: 0 4px 20px rgba(79,88,93,0.1);
-            border-color: #db0f0f;
-            background: #fff;
-        }
-        .partner-logo-wrap {
-            width: 90px; height: 50px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .partner-logo-wrap img {
-            max-width: 100%; max-height: 100%;
-            object-fit: contain;
-            filter: grayscale(100%); opacity: 0.6;
-            transition: filter 0.3s, opacity 0.3s;
-        }
-        .partner-item:hover .partner-logo-wrap img { filter: grayscale(0%); opacity: 1; }
-        .partner-name {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 0.78rem; font-weight: 700;
-            letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--slate-light);
-            transition: color 0.2s;
-        }
-        .partner-item:hover .partner-name { color: #db0f0f; }
+            .partners-section {
+    background: #f8fafc;
+}
+
+.partner-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    transition: .3s;
+    height: 100%;
+}
+
+.partner-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+.partner-logo {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.partner-logo img {
+    max-height: 80px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.partner-card h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.partner-title {
+    display: inline-block;
+    color: #0d6efd;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.partner-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+}
     </style>
 
     {{-- SERVICES SECTION home page --}}

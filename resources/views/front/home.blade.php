@@ -104,31 +104,42 @@
     {{-- ─── PARTNERS ─────────────────────────────────────────── --}}
     @if($section->name === 'partners')
     @php $p = $section->content; @endphp
-    <section class="partners-section">
-        <div class="container mb-4">
-            <h2 class="section-title">{{ $p['title'] ?? 'Partenaires Exclusifs' }}</h2>
-        </div>
-        <div class="partners-track-wrapper">
-            <div class="partners-track">
-                {{-- First set --}}
-                @foreach($p['partners'] as $partner)
-                <div class="partner-item">
-                    <div class="partner-logo-wrap">
-                        <img src="{{ Str::startsWith($partner['logo'], 'http') ? $partner['logo'] : asset('storage/'.$partner['logo']) }}"
-                             alt="{{ $partner['name'] }}">
+    <section class="partners-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>{{ $section->content['title'] ?? 'Partenaires Exclusifs' }}</h2>
+            </div>
+
+            <div class="row g-4">
+                @foreach(($section->content['partners'] ?? []) as $partner)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="partner-card h-100">
+
+                            <div class="partner-logo">
+                                <img
+                                    src="{{ asset('storage/' . $partner['logo']) }}"
+                                    alt="{{ $partner['name'] }}"
+                                >
+                            </div>
+
+                            <div class="partner-content">
+                                <h4>{{ $partner['name'] }}</h4>
+
+                                @if(!empty($partner['title']))
+                                    <span class="partner-title">
+                                        {{ $partner['title'] }}
+                                    </span>
+                                @endif
+
+                                @if(!empty($partner['description']))
+                                    <p>
+                                        {{ $partner['description'] }}
+                                    </p>
+                                @endif
+                            </div>
+
+                        </div>
                     </div>
-                    <span class="partner-name">{{ $partner['name'] }}</span>
-                </div>
-                @endforeach
-                {{-- Duplicate for infinite loop --}}
-                @foreach($p['partners'] as $partner)
-                <div class="partner-item">
-                    <div class="partner-logo-wrap">
-                        <img src="{{ Str::startsWith($partner['logo'], 'http') ? $partner['logo'] : asset('storage/'.$partner['logo']) }}"
-                             alt="{{ $partner['name'] }}">
-                    </div>
-                    <span class="partner-name">{{ $partner['name'] }}</span>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -181,15 +192,15 @@
 {{-- voir plus js --}}
 <script>
 
-    // Services accordion
-function toggleService(i) {
-    const acc     = document.getElementById('service-' + i);
-    const isOpen  = acc.classList.contains('open');
-    // Close all first
-    document.querySelectorAll('.service-accordion').forEach(el => el.classList.remove('open'));
-    // Open clicked if it was closed
-    if (!isOpen) acc.classList.add('open');
-}
+        // Services accordion
+    function toggleService(i) {
+        const acc     = document.getElementById('service-' + i);
+        const isOpen  = acc.classList.contains('open');
+        // Close all first
+        document.querySelectorAll('.service-accordion').forEach(el => el.classList.remove('open'));
+        // Open clicked if it was closed
+        if (!isOpen) acc.classList.add('open');
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
         const track    = document.getElementById('sliderTrack');
@@ -233,15 +244,6 @@ function toggleService(i) {
             updateDots();
         }
 
-        //         // Services accordion
-        // function toggleService(i) {
-        //     const acc     = document.getElementById('service-' + i);
-        //     const isOpen  = acc.classList.contains('open');
-        //     // Close all first
-        //     document.querySelectorAll('.service-accordion').forEach(el => el.classList.remove('open'));
-        //     // Open clicked if it was closed
-        //     if (!isOpen) acc.classList.add('open');
-        // }
 
         prevBtn.addEventListener('click', () => goTo(current - perView));
         nextBtn.addEventListener('click', () => goTo(current + perView));

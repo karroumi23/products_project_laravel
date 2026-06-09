@@ -77,40 +77,25 @@ class SectionResource extends Resource
                 ])->columns(2),
 
             // ─── PARTNERS ─────────────────────────────────────────
-            Forms\Components\Section::make('Contenu Partenaires')
-                ->visible(fn (Get $get) => $get('name') === 'partners')
+            Forms\Components\Repeater::make('content.partners')
+                ->label('Partenaires')
                 ->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->label('Nom du partenaire')
+                        ->required(),
+                    Forms\Components\Textarea::make('description')
+                        ->label('Description')
+                        ->rows(2),
+                    Forms\Components\FileUpload::make('logo')
+                        ->label('Logo')
+                        ->image()
+                        ->directory('partners')
+                        ->disk('public'),
+                ])
+                ->columns(3)
+                ->columnSpanFull(),
 
-                    Forms\Components\TextInput::make('content.title')
-                        ->label('Titre de la section')
-                        ->columnSpanFull(),
-
-                    Forms\Components\Repeater::make('content.partners')
-                        ->label('Partenaires')
-                        ->schema([
-
-                            Forms\Components\TextInput::make('name')
-                                ->label('Nom du partenaire')
-                                ->required(),
-
-                            Forms\Components\Textarea::make('description')
-                                ->label('Description')
-                                ->rows(3),
-
-                            Forms\Components\FileUpload::make('logo')
-                                ->label('Logo')
-                                ->image()
-                                ->directory('partners')
-                                ->disk('public'),
-
-                        ])
-                        ->columns(2)
-                        ->columnSpanFull()
-                        ->collapsible()
-                        ->cloneable()
-                        ->reorderable(),
-
-                ]),
+                
 
             // ─── SERVICES ─────────────────────────────────────────
             Forms\Components\Section::make('Contenu Services')

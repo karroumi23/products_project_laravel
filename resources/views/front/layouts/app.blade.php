@@ -374,13 +374,13 @@
             will-change: transform;
         }
         .slide-item {
-            flex: 0 0 calc(33.333% - 11px);
-            min-width: calc(33.333% - 11px);
+            flex: 0 0 calc(25% - 12px);
+            min-width: calc(25% - 12px);
         }
         .product-card {
             background: #fff; border-radius: 8px; overflow: hidden;
             display: flex; flex-direction: column;
-            height: 360px;
+            height: auto;
             border: 1px solid rgba(79,88,93,0.08);
             transition: box-shadow 0.22s, transform 0.22s;
             position: relative;
@@ -443,6 +443,8 @@
             font-weight: 700; font-size: 0.8rem;
             padding: 3px 10px; border-radius: 2px; width: fit-content;
         }
+        /* Clamp description to 3 lines */
+
         .product-card-footer { padding: 0 16px 14px 16px; margin-top: auto; }
         .btn-detail {
             display: flex; align-items: center; justify-content: center; gap: 7px;
@@ -480,6 +482,42 @@
             border-color: var(--slate-dark);
             color: #fff;
         }
+
+        .product-description {
+          margin-top: 12px;
+        }
+
+        .description-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: #5a5a5a;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .description-text.expanded {
+            display: block;
+            overflow: visible;
+        }
+
+        .voir-plus-btn {
+            border: none;
+            background: transparent;
+            color: #db0f0f;
+            font-weight: 600;
+            font-size: .85rem;
+            padding: 0;
+            margin-top: 6px;
+            cursor: pointer;
+        }
+
+        .voir-plus-btn:hover {
+            color: var(--slate-dark);
+        }
+
        /* Responsive */
         @media (max-width: 1199px) {
             .slide-item {

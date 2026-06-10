@@ -1,7 +1,153 @@
 @extends('front.layouts.app')
 @section('content')
 
+<style>
+    .product-card-pg {
+        background: #fff; border-radius: 8px; overflow: hidden;
+        display: flex; flex-direction: column;
+        height: auto;
+        min-height:28rem;
+        border: 1px solid rgba(79,88,93,0.08);
+        transition: box-shadow 0.22s, transform 0.22s;
+        position: relative;
+    }
+    .product-card-pg:hover {
+        box-shadow: 0 12px 40px rgba(79,88,93,0.14);
+        transform: translateY(-4px);
+    }
 
+        /* Show full image without cropping */
+    .product-card-img-wrap {
+        width: 100%;
+        height: 200px;
+        flex-shrink: 0;
+        overflow: hidden;
+        background: #fff;
+        position: relative;
+        padding: 10px;
+    }
+    .product-card-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;   /* ← full image visible */
+        object-position: center center;
+        transition: transform 0.5s ease;
+        display: block;
+    }
+    .product-card-pg:hover .product-card-img-wrap img {
+        transform: scale(1.06);
+    }
+    .product-card-img-wrap::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%;
+        height: 2px;
+        background: #db0f0f;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    .product-card-pg:hover .product-card-img-wrap::after {
+        transform: scaleX(1);
+    }
+    .product-card-body {
+        padding: 12px 16px 8px 16px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+    }
+    .product-card-name {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1rem; font-weight: 700; color: var(--slate-dark);
+        letter-spacing: 0.03em; text-transform: uppercase; margin-bottom: 6px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .product-card-price {
+        display: inline-flex; align-items: center; gap: 4px;
+        background: #db0f0f; color: #fff;
+        font-weight: 700; font-size: 0.8rem;
+        padding: 3px 10px; border-radius: 2px; width: fit-content;
+    }
+    /* Clamp description to 3 lines */
+
+    .product-card-footer { padding: 0 16px 14px 16px; margin-top: auto; }
+    .btn-detail {
+        display: flex; align-items: center; justify-content: center; gap: 7px;
+        width: 100%; background: var(--slate-dark); color: #fff;
+        font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+        text-transform: uppercase; padding: 9px 16px; border-radius: 4px;
+        text-decoration: none; transition: background 0.18s;
+    }
+    .btn-detail:hover { background: #db0f0f; color: #fff; }
+   
+    .slider-dot.active { background: #db0f0f; width: 22px; border-radius: 4px; }
+    .btn-voir-tous {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+        text-transform: uppercase; color: #fff; background: #db0f0f;
+        border: 1.5px solid #db0f0f; padding: 8px 18px; border-radius: 4px;
+        text-decoration: none; transition: all 0.18s; white-space: nowrap;
+    }
+    .btn-voir-tous:hover {
+        background: var(--slate-dark);
+        border-color: var(--slate-dark);
+        color: #fff;
+    }
+
+    .product-description {
+      margin-top: 12px;
+    }
+
+    .description-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        color: #5a5a5a;
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .description-text.expanded {
+        display: block;
+        overflow: visible;
+    }
+
+    .voir-plus-btn {
+        border: none;
+        background: transparent;
+        color: #db0f0f;
+        font-weight: 600;
+        font-size: .85rem;
+        padding: 0;
+        margin-top: 6px;
+        cursor: pointer;
+    }
+
+    .voir-plus-btn:hover {
+        color: var(--slate-dark);
+    }
+
+   /* Responsive */
+    @media (max-width: 1199px) {
+        .slide-item {
+            flex: 0 0 calc(33.333% - 11px);
+            min-width: calc(33.333% - 11px);
+        }
+    }
+    @media (max-width: 991px) {
+        .slide-item {
+            flex: 0 0 calc(50% - 8px);
+            min-width: calc(50% - 8px);
+        }
+    }
+    @media (max-width: 575px) {
+        .slide-item { flex: 0 0 100%; min-width: 100%; }
+    }
+</style>
 
 
  {{-- FILTER --}}
@@ -151,23 +297,38 @@
         <div class="row g-4">
             @forelse($products as $product)
             <div class="col-sm-6 col-lg-4">
-                <div class="product-card">
+                <div class="product-card-pg">
                     <div class="product-card-img-wrap">
                         <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->nom }}">
                     </div>
+
                     <div class="product-card-body">
-                        <div class="product-card-name">{{ $product->nom }}</div>
-                        <div class="product-card-price">
-                            <i class="bi bi-tag-fill"></i> {{ $product->prix }} MAD
+                        <div class="product-card-name">
+                            {{ $product->nom }}
                         </div>
-                        <p class="product-card-desc">{{ $product->description }}</p>
-                        <button class="btn-voir-plus" style="display:none">
-                            <i class="bi bi-chevron-down"></i> Voir plus
-                        </button>
+
+                        <div class="product-card-price">
+                            <i class="bi bi-tag-fill"></i>
+                            {{ $product->prix }} MAD
+                        </div>
+
+                        <div class="product-description">
+                            <span class="description-text">
+                                {{ $product->description }}
+                            </span>
+
+                            @if(strlen($product->description) > 150)
+                                <button class="voir-plus-btn">
+                                    Voir plus
+                                </button>
+                            @endif
+                        </div>
                     </div>
+
                     <div class="product-card-footer">
                         <a href="/products/{{ $product->id }}" class="btn-detail">
-                            <i class="bi bi-eye"></i> Voir le produit
+                            <i class="bi bi-eye"></i>
+                            Voir le produit
                         </a>
                     </div>
                 </div>
@@ -249,6 +410,31 @@
             });
         });
     });
+
+
+
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.querySelectorAll('.voir-plus-btn').forEach(button => {
+
+            button.addEventListener('click', function () {
+
+                const text = this.previousElementSibling;
+
+                text.classList.toggle('expanded');
+
+                this.textContent =
+                    text.classList.contains('expanded')
+                    ? 'Voir moins'
+                    : 'Voir plus';
+            });
+
+        });
+
+    });
+    </script>
 
 @endsection

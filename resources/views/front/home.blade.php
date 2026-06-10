@@ -220,7 +220,8 @@
         function getPerView() {
             if (window.innerWidth < 576) return 1;
             if (window.innerWidth < 992) return 2;
-            return 3;
+            if (window.innerWidth < 1200) return 3;
+            return 4;  // ← 4 on large screens
         }
         function getSlideWidth() { return items[0].offsetWidth + 16; }
         function buildDots() {
@@ -246,6 +247,7 @@
             nextBtn.disabled = current >= maxIndex;
             updateDots();
         }
+
 
 
         prevBtn.addEventListener('click', () => goTo(current - perView));

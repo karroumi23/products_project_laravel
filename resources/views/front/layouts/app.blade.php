@@ -367,6 +367,9 @@
     <style>
 
         /* ─── SLIDER ─────────────────────────────────────────────── */
+        .products-section{
+            padding: 40px 0;
+        }
         .slider-wrapper { overflow: hidden; border-radius: 8px; }
         .slider-track {
             display: flex; gap: 16px;
@@ -483,40 +486,6 @@
             color: #fff;
         }
 
-        .product-description {
-          margin-top: 12px;
-        }
-
-        .description-text {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            color: #5a5a5a;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .description-text.expanded {
-            display: block;
-            overflow: visible;
-        }
-
-        .voir-plus-btn {
-            border: none;
-            background: transparent;
-            color: #db0f0f;
-            font-weight: 600;
-            font-size: .85rem;
-            padding: 0;
-            margin-top: 6px;
-            cursor: pointer;
-        }
-
-        .voir-plus-btn:hover {
-            color: var(--slate-dark);
-        }
 
        /* Responsive */
         @media (max-width: 1199px) {
@@ -800,8 +769,7 @@
         /* ─── PARTNERS SECTION ───────────────────────────────────── */
         .partners-section {
             background: #f5f6f7;
-            padding: 60px 0;
-            border-top: 1px solid rgba(79,88,93,0.08);
+            padding: 40px 0;
         }
 
         /* Slider */
@@ -943,7 +911,7 @@
         /* ─── SERVICES SECTION ───────────────────────────────────── */
         .services-section {
             background: #f5f6f7;
-            padding: 60px 0;
+            padding: 40px 0;
         }
         .services-subtitle {
             color: var(--slate-light);

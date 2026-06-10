@@ -57,7 +57,7 @@
 
     {{-- ─── PRODUCTS SLIDER ──────────────────────────────────── --}}
     @if($section->name === 'hero')
-        <section class="products-section">
+        <section class="products-section ">
             <div class="container">
                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
                     <h2 class="section-title">Nos Produits</h2>
@@ -155,7 +155,7 @@
     @php $s = $section->content; @endphp
         <section class="services-section">
             <div class="container">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-5">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
                     <div>
                         <h2 class="section-title">{{ $s['title'] ?? 'Nos Services' }}</h2>
                         @if(!empty($s['subtitle']))

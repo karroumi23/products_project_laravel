@@ -763,6 +763,89 @@
         }
     </style>
 
+    {{-- Show product (by index) page  --}}
+    <style>
+        .product-show-card,.info-card
+        {
+            background:#fff;
+            border-radius:10px;
+            padding:30px;
+            box-shadow:0 8px 25px rgba(0,0,0,.05);
+        }
+
+        .product-image-box{
+            background:#fff;
+            border:1px solid #eee;
+            border-radius:10px;
+            padding:20px;
+            text-align:center;
+        }
+
+        .product-image-box img{
+            max-height:450px;
+            object-fit:contain;
+        }
+
+        .product-category{
+            display:inline-block;
+            background:#db0f0f;
+            color:#fff;
+            padding:6px 14px;
+            border-radius:4px;
+            font-size:.85rem;
+            margin-bottom:15px;
+        }
+
+        .product-title{
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:2.4rem;
+            font-weight:700;
+            margin-bottom:15px;
+            text-transform:uppercase;
+        }
+
+        .product-price{
+            color:#db0f0f;
+            font-size:2rem;
+            font-weight:700;
+            margin-bottom:20px;
+        }
+
+        .product-short-description{
+            color:#666;
+            line-height:1.8;
+        }
+
+        .btn-devis{
+            background:#db0f0f;
+            color:#fff;
+            padding:12px 24px;
+            border-radius:5px;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .btn-contact{
+            background:#364146;
+            color:#fff;
+            padding:12px 24px;
+            border-radius:5px;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .btn-devis:hover,
+        .btn-contact:hover{
+            color:#fff;
+            opacity:.9;
+        }
+
+        .product-description{
+            line-height:1.9;
+            color:#555;
+        }
+    </style>
+
 
     {{-- PARTNERS SECTION home page --}}
     <style>

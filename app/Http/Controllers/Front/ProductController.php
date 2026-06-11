@@ -63,6 +63,16 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('categorie')->findOrFail($id);
-        return view('front.products.show', compact('product'));
+
+        $similarProducts = Product::where('categorie_id', $product->categorie_id)
+            ->where('id', '!=', $product->id)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('front.products.show', compact(
+            'product',
+            'similarProducts'
+        ));
     }
 }

@@ -825,6 +825,25 @@
             font-weight:600;
         }
 
+        .btn-whatsapp{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            background:#25D366;
+            color:#fff;
+            padding:12px 24px;
+            border-radius:5px;
+            text-decoration:none;
+            font-weight:600;
+            transition:.3s;
+        }
+
+        .btn-whatsapp:hover{
+            background:#1ebe5d;
+            color:#fff;
+            transform:translateY(-2px);
+        }
+
         .btn-contact{
             background:#364146;
             color:#fff;

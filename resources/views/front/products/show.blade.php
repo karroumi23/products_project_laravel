@@ -60,11 +60,12 @@
 
                 <div class="d-flex gap-3 flex-wrap mt-4">
 
-                    <a href="/contact?product={{ $product->id }}"
-                       class="btn-devis">
-                        <i class="bi bi-file-earmark-text"></i>
-                        Demander un devis
-                    </a>
+                    <a href="https://wa.me/212669809872?text={{ urlencode('Bonjour, je souhaite demander un devis pour le produit : '.$product->nom) }}"
+                        target="_blank"
+                        class="btn-whatsapp">
+                         <i class="bi bi-whatsapp"></i>
+                         Demander un devis
+                     </a>
 
                     <a href="/contact"
                        class="btn-contact">

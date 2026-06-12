@@ -112,6 +112,20 @@
             transition: color 0.2s, border-color 0.2s;
             position: relative;
         }
+
+        /* contact link */
+        .nav-contact-btn{
+            border:1.5px solid #db0f0f;
+            color:#db0f0f !important;
+            padding:10px 18px;
+            border-radius:4px;
+            transition:.3s;
+        }
+        .nav-contact-btn:hover{
+            background:#db0f0f;
+            color:#fff !important;
+        }
+        
         .nav-menu li a i { font-size: 0.9rem; opacity: 0.7; }
         .nav-menu li a:hover { color: var(--accent); }
         .nav-menu li a.active { color: var(--accent); font-weight: 600; }
@@ -1594,6 +1608,12 @@
                     <i class="bi bi-info-circle"></i> À Propos
                 </a>
             </li>
+            <li>
+                <a href="/contact" class="{{ request()->is('contact*') ? 'active' : '' }}">
+                    <i class="bi bi-envelope"></i> Contact
+                </a>
+            </li>
+
         </ul>
         <button class="mobile-toggler" id="mobileToggler" aria-label="Menu">
             <span></span>

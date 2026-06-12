@@ -26,8 +26,11 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/services', function () {
     return view('front.services');
 });
-//apropos
+//Apropos
 Route::get('/apropos', function () {
     return view('front.apropos');
 });
 
+// Contact
+Route::get('/contact', [ProductController::class, 'contact'])->name('contact');
+Route::post('/contact', [ProductController::class, 'contactSubmit'])->name('contact.submit');

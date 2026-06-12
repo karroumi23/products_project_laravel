@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Front;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Categorie;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -74,5 +76,24 @@ class ProductController extends Controller
             'product',
             'similarProducts'
         ));
+    }
+
+    // page Contact
+    public function contact()
+    {
+        return view('front.contact');
+    }
+
+    public function contactSubmit(Request $request)
+    {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email',
+            'telephone' => 'nullable|string',
+            'sujet' => 'nullable|string',
+            'message' => 'required|string',
+        ]);
+
+        return back()->with('success', 'Votre message a été envoyé avec succès !');
     }
 }

@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+// contact email
+use App\Mail\ContactMessage;
+use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
 {
@@ -85,15 +88,18 @@ class ProductController extends Controller
     }
 
     public function contactSubmit(Request $request)
-    {
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'email' => 'required|email',
-            'telephone' => 'nullable|string',
-            'sujet' => 'nullable|string',
-            'message' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'nom'       => 'required|string|max:255',
+        'email'     => 'required|email',
+        'telephone' => 'nullable|string',
+        'sujet'     => 'nullable|string',
+        'message'   => 'required|string',
+    ]);
 
-        return back()->with('success', 'Votre message a été envoyé avec succès !');
-    }
+    Mail::to(config('mail.stock_manager'))
+        ->send(new ContactMessage($request->all()));
+
+    return back()->with('success', 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
+}
 }

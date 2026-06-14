@@ -1,6 +1,21 @@
 @extends('front.layouts.app')
+
+{{-- Horaires d'ouverture --}}
+@php
+    use Carbon\Carbon;
+
+    $now = Carbon::now('Africa/Casablanca');
+
+    $day = $now->dayOfWeek; // 0 = Sunday, 6 = Saturday
+    $hour = $now->format('H:i');
+
+    $isOpen = ($day >= 1 && $day <= 5)
+        && ($hour >= '08:30' && $hour <= '17:00');
+@endphp
+
 @section('content')
 
+{{--success msg  --}}
 @if(session('success'))
 <div class="container mt-3">
     <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
@@ -101,7 +116,28 @@
     .hours-table td { padding: 10px 0; color: var(--slate-light); }
     .hours-table td:first-child { font-weight: 600; color: var(--slate-dark); }
     .hours-table td:last-child { text-align: right; }
-    .status-open {
+    /*  Hours */
+    .status-open{
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        color:#198754;
+        font-weight:600;
+    }
+
+    .status-closed{
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        color:#dc3545;
+        font-weight:600;
+    }
+
+    .status-open i,
+    .status-closed i{
+        font-size:8px;
+    }
+    /* .status-open {
         display: inline-flex; align-items: center; gap: 6px;
         color: #198754; font-size: 0.78rem; font-weight: 600;
         text-transform: uppercase; letter-spacing: 0.05em;
@@ -110,7 +146,7 @@
         content: ''; width: 7px; height: 7px;
         background: #198754; border-radius: 50%;
         display: inline-block;
-    }
+    } */
 
     /* Form */
     .form-control-aqua {
@@ -160,7 +196,12 @@
         border: 1px solid rgba(79,88,93,0.1);
         height: 320px;
     }
-    .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .map-wrap iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+    }
 </style>
 
 {{-- HERO --}}
@@ -235,7 +276,17 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="pt-3">
-                                    <span class="status-open">Ouvert actuellement</span>
+                                    @if($isOpen)
+                                        <span class="status-open">
+                                            <i class="bi bi-circle-fill"></i>
+                                            Ouvert actuellement
+                                        </span>
+                                    @else
+                                        <span class="status-closed">
+                                            <i class="bi bi-circle-fill"></i>
+                                            Fermé actuellement
+                                        </span>
+                                    @endif
                                 </td>
                             </tr>
                         </table>

@@ -125,7 +125,7 @@
             background:#db0f0f;
             color:#fff !important;
         }
-        
+
         .nav-menu li a i { font-size: 0.9rem; opacity: 0.7; }
         .nav-menu li a:hover { color: var(--accent); }
         .nav-menu li a.active { color: var(--accent); font-weight: 600; }
@@ -310,7 +310,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: #e30613;
+            background: #2e06e3;
             color: #fff;
             font-weight: 700;
             font-size: 0.92rem;

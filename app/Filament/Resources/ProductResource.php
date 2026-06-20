@@ -98,6 +98,7 @@ class ProductResource extends Resource
     {
         return $table->columns([
             Tables\Columns\ImageColumn::make('image')
+
                 ->getStateUsing(fn ($record) => asset('storage/' . $record->image)),
 
             Tables\Columns\TextColumn::make('nom')
@@ -159,3 +160,9 @@ class ProductResource extends Resource
         ];
     }
 }
+
+
+
+htdocs/public/storage/products(the image products i adding now)
+
+htdocs/storage/products(the image products i ready have )

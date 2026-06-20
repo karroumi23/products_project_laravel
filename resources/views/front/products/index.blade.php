@@ -81,7 +81,7 @@
         text-decoration: none; transition: background 0.18s;
     }
     .btn-detail:hover { background: #db0f0f; color: #fff; }
-   
+
     .slider-dot.active { background: #db0f0f; width: 22px; border-radius: 4px; }
     .btn-voir-tous {
         display: inline-flex; align-items: center; gap: 6px;
@@ -270,7 +270,7 @@
 {{-- PRODUCTS --}}
 <section class="products-section">
     <div class="container">
-
+         {{-- filter --}}
         <div class="results-bar">
             <div class="results-count">
                 <strong>{{ $products->total() }}</strong>

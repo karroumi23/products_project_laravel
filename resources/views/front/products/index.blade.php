@@ -373,9 +373,9 @@
         transition: transform 0.25s ease;
     }
 
-    .product-card-pg:hover .product-card-media::after {
+    /* .product-card-pg:hover .product-card-media::after {
         transform: scaleX(1);
-    }
+    } */
 
     .product-card-media img {
         display: block;

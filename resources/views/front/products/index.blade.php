@@ -198,7 +198,7 @@
 
     .products-filter .filter-groups {
         display: grid;
-        grid-template-columns: 1.4fr 0.8fr 0.8fr;
+        grid-template-columns: 1.2fr 1fr 0.8fr;
         gap: 0;
         border: 0;
         border-radius: 0;
@@ -339,7 +339,7 @@
         box-shadow: 0 18px 46px rgba(54, 62, 66, 0.14);
     }
 
-    .product-card-media {
+    /* .product-card-media {
         position: relative;
         display: flex;
         align-items: center;
@@ -349,8 +349,17 @@
         background:
             linear-gradient(180deg, #fff 0%, #fafafa 100%);
         border-bottom: 1px solid rgba(79, 88, 93, 0.08);
-    }
-
+    } */
+    .product-card-media {
+        position: relative;
+        height: 260px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #fff;
+     }
     .product-card-media::after {
         content: '';
         position: absolute;
@@ -369,16 +378,18 @@
     }
 
     .product-card-media img {
-        width: 100%;
-        height: 100%;
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
         object-fit: contain;
-        object-position: center;
-        transition: transform 0.4s ease;
+        transition: transform .35s ease;
     }
 
-    .product-card-pg:hover .product-card-media img {
-        transform: scale(1.045);
-    }
+    /* .product-card-pg:hover .product-card-media img {
+        transform: scale(1.05);
+    } */
 
     .product-card-badge {
         position: absolute;
@@ -672,6 +683,7 @@
                     </div>
 
                     <div class="filter-groups">
+                        {{-- Catégorie --}}
                         <div class="filter-group-box">
                             <div class="filter-group-label">
                                 <i class="bi bi-tag-fill"></i> Catégorie
@@ -707,7 +719,7 @@
                                 @endforeach
                             </div>
                         </div>
-
+                        {{-- prix --}}
                         <div class="filter-group-box">
                             <div class="filter-group-label">
                                 <i class="bi bi-bar-chart-fill"></i> Prix
@@ -725,7 +737,7 @@
                                 </button>
                             </div>
                         </div>
-
+                        {{-- Ancienneté --}}
                         <div class="filter-group-box">
                             <div class="filter-group-label">
                                 <i class="bi bi-clock-fill"></i> Ancienneté
@@ -839,6 +851,7 @@
                             </div>
                         </article>
                     </div>
+               {{-- filter if empty --}}
                 @empty
                     <div class="col-12">
                         <div class="products-empty">

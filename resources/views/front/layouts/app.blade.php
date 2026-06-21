@@ -1557,6 +1557,355 @@
         }
     </style>
 
+    {{-- Modern global front refresh --}}
+    <style>
+        :root {
+            --surface: #ffffff;
+            --surface-soft: #f5f6f7;
+            --surface-muted: #eef1f3;
+            --text: #273136;
+            --text-soft: #647179;
+            --accent-dark: #b90c0c;
+            --shadow-soft: 0 18px 55px rgba(54, 62, 66, 0.11);
+            --shadow-hover: 0 22px 60px rgba(54, 62, 66, 0.16);
+            --radius: 8px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text);
+            background: var(--surface-soft);
+            overflow-x: hidden;
+        }
+
+        a,
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .topbar {
+            padding: 8px 0;
+            background: #2f363a;
+        }
+
+        .main-navbar {
+            backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.94);
+        }
+
+        .main-navbar .container {
+            min-height: 72px;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            margin-right: 28px;
+            padding: 10px 0;
+        }
+
+        .navbar-logo img {
+            height: 48px;
+        }
+
+        .nav-menu {
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-menu li a {
+            min-height: 42px;
+            padding: 0 14px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: rgba(219, 15, 15, 0.07);
+        }
+
+        .nav-menu li a.active::after {
+            content: '';
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            bottom: 6px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 999px;
+        }
+
+        .mobile-toggler {
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .mobile-menu {
+            position: sticky;
+            top: 72px;
+            z-index: 999;
+            box-shadow: 0 18px 36px rgba(54, 62, 66, 0.12);
+        }
+
+        .mobile-menu a {
+            margin: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .navbar-accent-bar {
+            height: 2px;
+        }
+
+        .section-title,
+        .section-heading,
+        .timeline-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.25rem);
+            letter-spacing: 0;
+            color: var(--slate-dark);
+        }
+
+        .section-title::after,
+        .section-heading::after {
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .page-hero {
+            position: relative;
+            overflow: hidden;
+            background: var(--slate-dark);
+            color: #fff;
+            padding: clamp(52px, 8vw, 92px) 0;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 82% 20%, rgba(219, 15, 15, 0.24), transparent 28%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 45%);
+            pointer-events: none;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-kicker,
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 13px;
+            border-radius: 6px;
+            background: rgba(219, 15, 15, 0.1);
+            color: #db0f0f;
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .page-kicker::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 999px;
+        }
+
+        .page-title {
+            max-width: 820px;
+            margin: 18px 0 0;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4.8rem);
+            font-weight: 800;
+            line-height: 0.98;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .page-title span {
+            color: var(--accent);
+        }
+
+        .page-lead {
+            max-width: 760px;
+            margin: 20px 0 0;
+            color: rgba(255, 255, 255, 0.74);
+            font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+            line-height: 1.8;
+        }
+
+        .site-section {
+            padding: clamp(48px, 7vw, 86px) 0;
+        }
+
+        .site-section-muted {
+            background: var(--surface-soft);
+        }
+
+        .site-card {
+            height: 100%;
+            border: 1px solid rgba(79, 88, 93, 0.1);
+            border-radius: var(--radius);
+            background: #fff;
+            box-shadow: 0 10px 32px rgba(54, 62, 66, 0.07);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .site-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(219, 15, 15, 0.24);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .icon-tile {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: rgba(219, 15, 15, 0.09);
+            color: var(--accent);
+            font-size: 1.2rem;
+            flex: 0 0 auto;
+        }
+
+        .btn-hero-primary,
+        .btn-voir-tous,
+        .btn-red,
+        .btn-submit,
+        .btn-detail,
+        .btn-devis {
+            border-radius: 6px;
+        }
+
+        .btn-hero-primary,
+        .btn-red,
+        .btn-submit {
+            box-shadow: 0 12px 26px rgba(219, 15, 15, 0.22);
+        }
+
+        .hero-section {
+            min-height: clamp(640px, 86vh, 820px);
+            margin-bottom: 0;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 5.8vw, 5rem);
+            line-height: 0.98;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            max-width: 620px;
+            font-size: 1rem;
+        }
+
+        .products-section,
+        .partners-section,
+        .services-section {
+            padding: clamp(48px, 7vw, 84px) 0;
+        }
+
+        .product-card,
+        .partner-card,
+        .service-accordion,
+        .product-show-card,
+        .info-card {
+            border-radius: var(--radius);
+            box-shadow: 0 10px 32px rgba(54, 62, 66, 0.07);
+        }
+
+        .product-card:hover,
+        .partner-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .main-footer {
+            background: #fdfdfd;
+            border-top: 1px solid rgba(79, 88, 93, 0.1);
+        }
+
+        .footer-top {
+            padding: clamp(44px, 6vw, 72px) 0;
+        }
+
+        .footer-heading {
+            color: var(--slate-dark);
+        }
+
+        .footer-bottom {
+            background: #2f363a;
+        }
+
+        @media (max-width: 991px) {
+            .main-navbar .container {
+                min-height: 64px;
+            }
+
+            .mobile-menu {
+                top: 64px;
+            }
+
+            .navbar-logo img {
+                height: 42px;
+            }
+
+            .hero-section {
+                min-height: 720px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .page-hero {
+                padding: 44px 0 50px;
+            }
+
+            .hero-section {
+                min-height: auto;
+                padding: 72px 0;
+            }
+
+            .hero-stats {
+                gap: 16px;
+            }
+
+            .hero-divider {
+                display: none;
+            }
+
+            .btn-hero-primary,
+            .btn-hero-outline,
+            .btn-red,
+            .btn-submit {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title {
+                margin-bottom: 26px;
+            }
+        }
+    </style>
+
 
 
 </head>
@@ -1638,6 +1987,9 @@
     <a href="/apropos" class="{{ request()->is('apropos*') ? 'active' : '' }}">
         <i class="bi bi-info-circle"></i> À Propos
     </a>
+    <a href="/contact" class="{{ request()->is('contact*') ? 'active' : '' }}">
+        <i class="bi bi-envelope"></i> Contact
+    </a>
 </div>
 
 
@@ -1654,22 +2006,27 @@
 <script>
     const toggler = document.getElementById('mobileToggler');
     const mobileMenu = document.getElementById('mobileMenu');
-    toggler.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        const spans = toggler.querySelectorAll('span');
-        if (mobileMenu.classList.contains('open')) {
-            spans[0].style.transform = 'translateY(7px) rotate(45deg)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
-        } else {
-            spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-        }
-    });
+    if (toggler && mobileMenu) {
+        toggler.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            toggler.setAttribute('aria-expanded', mobileMenu.classList.contains('open') ? 'true' : 'false');
+            const spans = toggler.querySelectorAll('span');
+            if (mobileMenu.classList.contains('open')) {
+                spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+            } else {
+                spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+            }
+        });
+    }
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('.main-navbar');
-        nav.style.boxShadow = window.scrollY > 10
-            ? '0 2px 24px rgba(79, 88, 93, 0.14)'
-            : '0 1px 16px rgba(79, 88, 93, 0.08)';
+        if (nav) {
+            nav.style.boxShadow = window.scrollY > 10
+                ? '0 2px 24px rgba(79, 88, 93, 0.14)'
+                : '0 1px 16px rgba(79, 88, 93, 0.08)';
+        }
     });
 </script>
 

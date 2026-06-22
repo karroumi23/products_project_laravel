@@ -1736,7 +1736,7 @@
             display:flex;
             align-items:center;
             min-height:380px;
-            padding:90px 0;
+            padding:60px 0;
             background:
                 linear-gradient(rgba(15,23,42,.88), rgba(15,23,42,.92)),
                 url('{{ asset("images/about-bg.jpg") }}');

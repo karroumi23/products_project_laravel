@@ -4,19 +4,19 @@
 
 <!-- ================= HERO ================= -->
 
-<section class="about-hero">
+<section class="page-hero">
 
-    <div class="container position-relative" style="z-index:2;">
+    <div class="container">
 
-        <div class="about-badge">
-            QUALITÉ • EXPERTISE • INNOVATION
-        </div>
+        <span class="page-kicker">
+            Qualité • Expertise • Innovation
+        </span>
 
-        <h1 class="about-title">
+        <h1 class="page-title">
             À Propos de <span>AQUALAB</span>
         </h1>
 
-        <p class="about-description">
+        <p class="page-lead">
             AQUALAB TECHNOLOGIE est considéré comme le leader dans le marché
             d’équipement et fourniture industrielle, scientifique et de laboratoire
             depuis 2006.
@@ -28,7 +28,7 @@
 
 <!-- ================= ABOUT INFO ================= -->
 
-<section class="about-info">
+<section >
 
     <div class="container">
 

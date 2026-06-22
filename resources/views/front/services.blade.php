@@ -3,46 +3,7 @@
 @section('content')
 
 <style>
-    .section-header{
-    text-align:center;
-    max-width:850px;
-    margin:0 auto 70px;
-    }
 
-    .section-badge{
-        display:inline-block;
-        background:rgba(219,15,15,.08);
-        color:#db0f0f;
-        padding:8px 18px;
-        border-radius:50px;
-        font-size:.8rem;
-        font-weight:700;
-        text-transform:uppercase;
-        letter-spacing:.12em;
-        margin-bottom:18px;
-    }
-
-    .section-header h2{
-        font-family:'Barlow Condensed',sans-serif;
-        font-size:2.8rem;
-        color:var(--slate-dark);
-        margin-bottom:18px;
-        line-height:1.2;
-    }
-
-    .section-divider{
-        width:70px;
-        height:4px;
-        background:#db0f0f;
-        border-radius:20px;
-        margin:0 auto 22px;
-    }
-
-    .section-header p{
-        color:#667085;
-        font-size:1.05rem;
-        line-height:1.9;
-    }
         .service-card{
         background:#fff;
         border-radius:8px;
@@ -148,32 +109,28 @@
 </style>
 
 
-<section class="py-5">
+<section class="page-hero">
+
     <div class="container">
 
-        <div class="section-header">
+        <span class="page-kicker">
+            Nos Services
+        </span>
 
-            <span class="section-badge">
-                Nos Services
-            </span>
+        <h1 class="page-title">
+            Des solutions complètes pour votre <span>laboratoire</span>
+        </h1>
 
-            <h2>
-                Des solutions complètes pour votre laboratoire
-            </h2>
-
-            <div class="section-divider"></div>
-
-            <p>
-                Nous accompagnons nos clients dans toutes les étapes de leurs projets,
-                de l'étude technique jusqu'à la maintenance de leurs équipements.
-            </p>
-
-        </div>
+        <p class="page-lead">
+            Nous accompagnons nos clients dans toutes les étapes de leurs projets,
+            de l'étude technique jusqu'à la maintenance de leurs équipements.
+        </p>
 
     </div>
+
 </section>
 
-<section class="pb-5">
+<section class="">
 
     <div class="container">
 
@@ -269,7 +226,7 @@
 
     </section>
 
-    <section class="why-us py-5">
+    <section >
 
         <div class="container">
 

@@ -625,6 +625,7 @@
 </style>
 
 <main class="products-page">
+    {{-- hero --}}
     <section class="products-hero">
         <div class="container">
             <div class="products-eyebrow">Catalogue produits</div>
@@ -888,9 +889,9 @@
             searchClear.style.display = this.value ? '' : 'none';
 
             searchTimer = setTimeout(function () {
-                document.getElementById('input-search').value = searchInput.value;
-                document.getElementById('filterForm').submit();
-            }, 400);
+               document.getElementById('input-search').value = searchInput.value;
+               document.getElementById('filterForm').submit();
+            }, 1000);
         });
 
         searchClear.addEventListener('click', function () {

@@ -248,6 +248,7 @@
     }
 </style>
 
+{{-- success alert --}}
 @if(session('success'))
     <div class="container">
         <div class="alert alert-success contact-alert d-flex align-items-center gap-2" role="alert">
@@ -257,6 +258,7 @@
     </div>
 @endif
 
+{{-- hero --}}
 <section class="page-hero">
     <div class="container">
         <span class="page-kicker">Contact</span>
@@ -273,6 +275,7 @@
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="d-grid gap-4">
+                    {{-- Coordonnées --}}
                     <div class="site-card contact-card-modern">
                         <h2>Coordonnées</h2>
                         <div class="contact-info-list">
@@ -299,7 +302,7 @@
                             </div>
                         </div>
                     </div>
-
+                    {{-- Horaires --}}
                     <div class="site-card contact-card-modern">
                         <h2>Horaires</h2>
                         <table class="hours-table-modern">
@@ -334,7 +337,7 @@
                     </div>
                 </div>
             </div>
-
+           {{-- contact --}}
             <div class="col-lg-8">
                 <div class="site-card contact-card-modern mb-4">
                     <h2>Envoyez-nous un message</h2>
@@ -373,7 +376,7 @@
 
             </div>
         </div>
-
+        {{-- map --}}
         <div class="site-card contact-map-card">
             <div class="contact-map-header">
                 <h2>Notre localisation</h2>

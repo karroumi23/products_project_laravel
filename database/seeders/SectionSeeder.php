@@ -17,7 +17,7 @@ class SectionSeeder extends Seeder
             'enabled' => true,
             'order'   => 1,
             'content' => [
-                'badge_text'          => 'Qualité & Précision',
+                'badge_text'          => 'Qualité & Précision ',
                 'title_main'          => 'Solutions Professionnelles pour',
                 'title_highlight'     => 'Laboratoire',
                 'title_suffix'        => '& Industrie',

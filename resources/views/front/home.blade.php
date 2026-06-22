@@ -1,9 +1,7 @@
 @extends('front.layouts.app')
 @section('content')
 
-{{-- ═══════════════════════════════════════════════════════════
-     RENDER SECTIONS IN ORDER
-═══════════════════════════════════════════════════════════ --}}
+
 
 @foreach($sections->sortBy('order') as $section)
 
@@ -12,18 +10,18 @@
     @php $h = $section->content; @endphp
         <section class="hero-section text-white">
             <div class="hero-overlay"></div>
-            <div class="container hero-content py-5">
-                <div class="row align-items-center min-vh-100">
-                    <div class="col-md-6 col-lg-5">
-                        <div class="hero-badge mb-4">
+            <div class="container hero-content">
+                <div class="row align-items-center hero-row">
+                    <div class="col-md-7 col-lg-6">
+                        <div class="hero-badge mb-3">
                             <span></span> {{ $h['badge_text'] }}
                         </div>
-                        <h1 class="hero-title mb-4">
+                        <h1 class="hero-title mb-3">
                             {{ $h['title_main'] }}
                             <span class="hero-highlight">{{ $h['title_highlight'] }}</span>
                             {{ $h['title_suffix'] }}
                         </h1>
-                        <p class="hero-subtitle mb-5">{{ $h['subtitle'] }}</p>
+                        <p class="hero-subtitle mb-4">{{ $h['subtitle'] }}</p>
                         <div class="d-flex gap-3 flex-wrap">
                             <a href="{{ $h['btn_primary_url'] }}" class="btn-hero-primary">
                                 <i class="bi bi-grid-fill"></i> {{ $h['btn_primary_text'] }}
@@ -32,7 +30,7 @@
                                 <i class="bi bi-tools"></i> {{ $h['btn_secondary_text'] }}
                             </a>
                         </div>
-                        <div class="hero-stats mt-5">
+                        <div class="hero-stats mt-4">
                             <div class="hero-stat">
                                 <strong>{{ $h['stat1_number'] }}</strong>
                                 <span>{{ $h['stat1_label'] }}</span>
@@ -53,6 +51,7 @@
             </div>
         </section>
     @endif
+
 
 
     {{-- ─── PRODUCTS SLIDER ──────────────────────────────────── --}}

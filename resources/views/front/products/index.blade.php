@@ -429,7 +429,7 @@
         margin: 0;
         color: var(--slate-dark);
         font-family: 'Barlow Condensed', sans-serif;
-        font-size: 1.25rem;
+        font-size: 1.05rem;
         font-weight: 800;
         line-height: 1.08;
         text-transform: uppercase;

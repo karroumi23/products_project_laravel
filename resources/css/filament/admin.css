@@ -1,0 +1,16 @@
+.app-logo img{
+    height:48px;
+    width:auto;
+}
+
+.logo-dark{
+    display:none;
+}
+
+.dark .logo-light{
+    display:none;
+}
+
+.dark .logo-dark{
+    display:block;
+}

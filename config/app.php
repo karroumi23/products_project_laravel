@@ -30,6 +30,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'frontend_url' => env('FRONTEND_URL', 'https://aqualab-tech-ak.gamer.gd'),
 
     /*
     |--------------------------------------------------------------------------

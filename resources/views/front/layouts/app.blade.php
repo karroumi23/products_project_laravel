@@ -2013,7 +2013,7 @@
 <nav class="main-navbar">
     <div class="container">
         <a class="navbar-logo" href="/">
-            <img src="{{ asset('images/logo.png') }}" alt="Aqualab Technologie">
+            <img src="{{ asset('images/logo-dark.png') }}" alt="Aqualab Technologie">
         </a>
         <ul class="nav-menu">
             <li>

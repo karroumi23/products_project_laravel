@@ -17,6 +17,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -24,20 +26,24 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-                ->default()
-                ->id('admin')
-                ->path('admin')
-                ->login()
+        ->default()
+        ->id('admin')
+        ->path('admin')
+        ->login()
 
-                // ->brandLogo(asset('images/logo-light.png'))
-                ->brandLogo(asset('images/logo-dark.png'))
-                ->darkModeBrandLogo(asset('images/logo-light.png'))
-                ->brandLogoHeight('50px')
-                ->brandName('')
+        ->brandLogo(asset('images/logo-dark.png'))
+        ->darkModeBrandLogo(asset('images/logo-light.png'))
+        ->brandLogoHeight('50px')
+        ->brandName('')
 
-                ->colors([
-                    'primary' => Color::Red,
-                  ])
+        ->renderHook(
+            PanelsRenderHook::TOPBAR_END,
+            fn (): string => view('filament.topbar.website-button')->render(),
+        )
+
+        ->colors([
+            'primary' => Color::Red,
+        ])
 
 
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -64,4 +70,6 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ]);
     }
+
+   
 }

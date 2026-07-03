@@ -8,7 +8,7 @@
                 {{-- Col 1 : Logo + desc + socials --}}
                 <div class="col-lg-4 col-md-6">
                     <a href="/" class="footer-logo">
-                        <img src="{{ asset('images/logo.png') }}" alt="Aqualab Technologie">
+                        <img src="{{ asset('images/logo-dark.png') }}" alt="Aqualab Technologie">
                     </a>
                     <p class="footer-desc">
                         Distribution et installation de matériels industriel,
@@ -46,10 +46,10 @@
                 <div class="col-lg-2 col-md-6 col-6">
                     <h4 class="footer-heading">Services</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Installation</a></li>
-                        <li><a href="#">Formation</a></li>
-                        <li><a href="#">Assistance</a></li>
-                        <li><a href="#">Stock & Pièces</a></li>
+                        <li><a href="/services">Installation</a></li>
+                        <li><a href="/services">Formation</a></li>
+                        <li><a href="/services">Assistance</a></li>
+                        <li><a href="/services">Stock & Pièces</a></li>
                     </ul>
                 </div>
 

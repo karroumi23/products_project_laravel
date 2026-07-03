@@ -110,6 +110,31 @@
         color: #dc3545;
     }
 
+    .product-quick-info {
+    margin-bottom: 4px;
+    }
+
+    .quick-info-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 14px;
+        border: 1px solid rgba(79, 88, 93, 0.14);
+        border-radius: 6px;
+        background: #f8f9fa;
+        color: var(--slate-dark);
+        font-size: 0.85rem;
+    }
+
+    .quick-info-pill i {
+        color: #db0f0f;
+        font-size: 0.95rem;
+    }
+
+    .quick-info-pill strong {
+        color: var(--slate-dark);
+    }
+
     .product-short-description,
     .product-description-full {
         color: var(--slate-light);
@@ -271,11 +296,18 @@
                             @endif
                         </div>
 
-                        <p class="product-short-description">
-                            {{ Str::limit($product->description, 260) }}
-                        </p>
+                        <div class="product-quick-info d-flex flex-wrap gap-2 mt-3 mb-4">
+                            <div class="quick-info-pill">
+                                <i class="bi bi-cash-coin"></i>
+                                <span>TTC : <strong>{{ number_format($product->prix_ttc, 2) }} MAD</strong></span>
+                            </div>
+                            <div class="quick-info-pill">
+                                <i class="bi bi-percent"></i>
+                                <span>TVA : <strong>{{ $product->tva }}%</strong></span>
+                            </div>
+                        </div>
 
-                        <div class="product-actions d-flex gap-3 flex-wrap mt-4">
+                        <div class="product-actions d-flex gap-3 flex-wrap mt-2">
                             <a href="https://wa.me/212669809872?text={{ urlencode('Bonjour, je souhaite demander un devis pour le produit : '.$product->nom) }}"
                                target="_blank"
                                class="btn-whatsapp">
@@ -290,6 +322,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="info-card mt-4">
+                <h2>Description</h2>
+                <p class="product-description-full mb-0">
+                    {!! nl2br(e($product->description)) !!}
+                </p>
             </div>
 
             <div class="info-card mt-4">
@@ -314,12 +353,7 @@
                 </div>
             </div>
 
-            <div class="info-card mt-4">
-                <h2>Description</h2>
-                <p class="product-description-full mb-0">
-                    {!! nl2br(e($product->description)) !!}
-                </p>
-            </div>
+
 
             @if($similarProducts->count())
                 <div class="mt-5">

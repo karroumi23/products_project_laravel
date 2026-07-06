@@ -1,3 +1,5 @@
+/* hero top bar  */
+
 .app-logo img{
     height:48px;
     width:auto;
@@ -13,4 +15,40 @@
 
 .dark .logo-dark{
     display:block;
+}
+
+
+/* =========================
+   Compact Sidebar
+========================= */
+
+.fi-sidebar {
+    width: 190px !important;
+}
+
+.fi-main {
+    margin-left: 190px !important;
+}
+
+@media (min-width: 1024px) {
+    .fi-topbar {
+        padding-left: 190px !important;
+    }
+}
+
+/* Smaller navigation items */
+.fi-sidebar-item {
+    padding: 8px 12px !important;
+}
+
+.fi-sidebar-item-label {
+    font-size: 14px;
+}
+
+.fi-sidebar-header {
+    padding: 12px;
+}
+
+.fi-logo {
+    max-width: 120px;
 }

@@ -95,55 +95,69 @@ class ProductResource extends Resource
     }
 
     public static function table(Table $table): Table
-    {
-        return $table->columns([
-            Tables\Columns\ImageColumn::make('image')
-                ->getStateUsing(fn ($record) => asset('storage/' . $record->image)),
+{
+    return $table->columns([
+        Tables\Columns\ImageColumn::make('image')
+            ->label('')
+            ->getStateUsing(fn ($record) => asset('storage/' . $record->image))
+            ->size(32)
+            ->square(),
 
-            Tables\Columns\TextColumn::make('nom')
-                ->label('Nom')
-                ->searchable()
-                ->sortable(),
+        Tables\Columns\TextColumn::make('nom')
+            ->label('Nom')
+            ->searchable()
+            ->limit(20)
+            ->tooltip(fn ($record) => $record->nom)
+            ->grow(false),
 
-            Tables\Columns\TextColumn::make('categorie.nom')
-                ->label('Catégorie'),
+        Tables\Columns\TextColumn::make('categorie.nom')
+            ->label('Catégorie')
+            ->limit(12)
+            ->tooltip(fn ($record) => optional($record->categorie)->nom),
 
-            Tables\Columns\TextColumn::make('prix')
-                ->label('Prix HT')
-                ->money('MAD')
-                ->sortable(),
+        Tables\Columns\TextColumn::make('prix')
+            ->label('Prix HT')
+            ->money('MAD')
+            ->sortable(),
 
-            Tables\Columns\TextColumn::make('tva')
-                ->label('TVA')
-                ->formatStateUsing(fn ($state) => $state . '%'),
+        Tables\Columns\TextColumn::make('tva')
+            ->label('TVA')
+            ->formatStateUsing(fn ($state) => rtrim(rtrim(number_format($state, 2), '0'), '.') . '%')
+            ->toggleable(isToggledHiddenByDefault: true),
 
-            Tables\Columns\TextColumn::make('prix_ttc')
-                ->label('Prix TTC')
-                ->money('MAD')
-                ->sortable(),
+        Tables\Columns\TextColumn::make('prix_ttc')
+            ->label('Prix TTC')
+            ->money('MAD')
+            ->sortable(),
 
-            Tables\Columns\TextColumn::make('stock')
-                ->label('Stock')
-                ->sortable()
-                ->color(fn ($state) => $state <= 5 ? 'danger' : 'success'),
+        Tables\Columns\TextColumn::make('stock')
+            ->label('Stock')
+            ->sortable()
+            ->badge()
+            ->color(fn ($state) => match (true) {
+                $state <= 5 => 'danger',
+                $state <= 20 => 'warning',
+                default => 'success',
+            }),
 
-            Tables\Columns\TextColumn::make('created_at')
-                ->label('Date création')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make()->label('Modifier'),
-            Tables\Actions\DeleteAction::make()->label('Supprimer'),
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make()
-                    ->label('Supprimer sélection'),
-            ]),
-        ]);
-    }
+        Tables\Columns\TextColumn::make('created_at')
+            ->label('Date création')
+            ->dateTime('d/m/y')
+            ->sortable()
+            ->toggleable(isToggledHiddenByDefault: true),
+    ])
+    ->defaultSort('created_at', 'desc')
+    ->actions([
+        Tables\Actions\EditAction::make()->iconButton(),
+        Tables\Actions\DeleteAction::make()->iconButton(),
+    ])
+    ->bulkActions([
+        Tables\Actions\BulkActionGroup::make([
+            Tables\Actions\DeleteBulkAction::make()
+                ->label('Supprimer sélection'),
+        ]),
+    ]);
+}
 
     public static function getRelations(): array
     {
